@@ -82,7 +82,7 @@ class SettingsFragment : Fragment() {
 
         preferencesManager = PreferencesManager(requireContext())
         notificationScheduler = NotificationScheduler(requireContext())
-        billingHelper = BillingHelper(requireActivity())
+        billingHelper = BillingHelper(requireActivity(), preferencesManager)
 
         setupClickListeners()
         loadSettings()

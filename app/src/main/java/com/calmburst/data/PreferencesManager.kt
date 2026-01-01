@@ -309,7 +309,7 @@ class PreferencesManager(private val context: Context) {
                     "cannot be the same as end time. This would create an invalid quiet hours period."
                 )
             }
-        }.collect { } // Collect once to trigger validation
+        }.first() // Get first emission to trigger validation once
 
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.QUIET_HOURS_START] = startMinutes
@@ -352,7 +352,7 @@ class PreferencesManager(private val context: Context) {
                     "cannot be the same as start time. This would create an invalid quiet hours period."
                 )
             }
-        }.collect { } // Collect once to trigger validation
+        }.first() // Get first emission to trigger validation once
 
         context.dataStore.edit { preferences ->
             preferences[PreferenceKeys.QUIET_HOURS_END] = endMinutes

@@ -275,13 +275,12 @@ class SettingsFragment : Fragment() {
                 ).show()
 
                 // Revert to previous value by reloading from preferences
-                preferencesManager.quietHoursStart.collect { minutes ->
-                    if (minutes != null) {
-                        val (hour, minute) = preferencesManager.minutesToHourMinute(minutes)
-                        startHour = hour
-                        startMinute = minute
-                        updateStartTimeButton()
-                    }
+                val minutes = preferencesManager.quietHoursStart.first()
+                if (minutes != null) {
+                    val (hour, minute) = preferencesManager.minutesToHourMinute(minutes)
+                    startHour = hour
+                    startMinute = minute
+                    updateStartTimeButton()
                 }
             }
         }
@@ -308,13 +307,12 @@ class SettingsFragment : Fragment() {
                 ).show()
 
                 // Revert to previous value by reloading from preferences
-                preferencesManager.quietHoursEnd.collect { minutes ->
-                    if (minutes != null) {
-                        val (hour, minute) = preferencesManager.minutesToHourMinute(minutes)
-                        endHour = hour
-                        endMinute = minute
-                        updateEndTimeButton()
-                    }
+                val minutes = preferencesManager.quietHoursEnd.first()
+                if (minutes != null) {
+                    val (hour, minute) = preferencesManager.minutesToHourMinute(minutes)
+                    endHour = hour
+                    endMinute = minute
+                    updateEndTimeButton()
                 }
             }
         }

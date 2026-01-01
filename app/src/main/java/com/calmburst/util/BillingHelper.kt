@@ -473,13 +473,9 @@ class BillingHelper(
      */
     suspend fun shouldShowAds(): Boolean {
         return withContext(Dispatchers.IO) {
-            // Check preferences first
-            var adsRemoved = false
-            preferencesManager.adRemovalPurchased.collect { removed ->
-                adsRemoved = removed
-                return@collect
-            }
-            return@withContext !adsRemoved
+            // Check preferences - use first() to get single value instead of collecting indefinitely
+            val adsRemoved = preferencesManager.adRemovalPurchased.first()
+            !adsRemoved
         }
     }
 

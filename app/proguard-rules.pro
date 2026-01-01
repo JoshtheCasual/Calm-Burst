@@ -30,14 +30,5 @@
 -keep class * extends androidx.work.InputMerger
 -keep class androidx.work.impl.** { *; }
 
-# Google Play Billing
--keep class com.android.billingclient.api.** { *; }
-
-# AdMob
--keep public class com.google.android.gms.ads.** {
-   public *;
-}
--keep class com.google.android.gms.internal.** { *; }
-
 # Preserve quote data classes
 -keep class com.calmburst.data.** { *; }

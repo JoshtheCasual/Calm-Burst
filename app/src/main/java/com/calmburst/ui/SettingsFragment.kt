@@ -12,7 +12,6 @@ import com.calmburst.MainActivity
 import com.calmburst.R
 import com.calmburst.data.PreferencesManager
 import com.calmburst.databinding.FragmentSettingsBinding
-import com.calmburst.util.BillingHelper
 import com.calmburst.worker.NotificationScheduler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.first
@@ -34,11 +33,6 @@ import java.util.Calendar
  *    - End time (default: 08:00 / 8 AM)
  *    - Uses 24-hour format internally, displays user's preferred format
  *
- * 3. **Ad Removal**: One-time in-app purchase to remove all advertisements
- *    - Price: $1.00
- *    - Launches Google Play Billing flow
- *    - Displays "Ads Removed" status if already purchased
- *
  * All settings are persisted using [PreferencesManager] and DataStore.
  * Changing the notification interval triggers [NotificationScheduler] to
  * reschedule the WorkManager periodic tasks.
@@ -52,7 +46,6 @@ import java.util.Calendar
  *
  * @see PreferencesManager
  * @see NotificationScheduler
- * @see BillingHelper
  * @see HomeFragment
  */
 class SettingsFragment : Fragment() {
@@ -62,7 +55,6 @@ class SettingsFragment : Fragment() {
 
     private lateinit var preferencesManager: PreferencesManager
     private lateinit var notificationScheduler: NotificationScheduler
-    private lateinit var billingHelper: BillingHelper
 
     private var startHour: Int = 22 // Default: 10 PM
     private var startMinute: Int = 0
@@ -83,7 +75,6 @@ class SettingsFragment : Fragment() {
 
         preferencesManager = PreferencesManager(requireContext())
         notificationScheduler = NotificationScheduler(requireContext())
-        billingHelper = BillingHelper(requireActivity(), preferencesManager)
 
         setupClickListeners()
         loadSettings()
@@ -93,7 +84,6 @@ class SettingsFragment : Fragment() {
      * Sets up click listeners for all interactive elements:
      * - Radio buttons for interval selection
      * - Time picker buttons for quiet hours
-     * - Ad removal purchase button
      * - Back to home navigation button
      */
     private fun setupClickListeners() {
@@ -116,11 +106,6 @@ class SettingsFragment : Fragment() {
 
         binding.endTimeButton.setOnClickListener {
             showTimePickerDialog(false)
-        }
-
-        // Ad removal
-        binding.removeAdsButton.setOnClickListener {
-            launchAdRemovalPurchase()
         }
 
         // Back button
@@ -176,19 +161,6 @@ class SettingsFragment : Fragment() {
                     endMinute = 0
                 }
                 updateEndTimeButton()
-            }
-        }
-
-        // Load ad removal status
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.adsRemoved.collect { adsRemoved ->
-                if (adsRemoved) {
-                    binding.removeAdsButton.visibility = View.GONE
-                    binding.adsRemovedText.visibility = View.VISIBLE
-                } else {
-                    binding.removeAdsButton.visibility = View.VISIBLE
-                    binding.adsRemovedText.visibility = View.GONE
-                }
             }
         }
     }
@@ -316,38 +288,6 @@ class SettingsFragment : Fragment() {
                     updateEndTimeButton()
                 }
             }
-        }
-    }
-
-    /**
-     * Launches the Google Play Billing flow for ad removal purchase.
-     * Shows a toast message on success or failure.
-     * The actual billing logic is handled by BillingHelper via MainActivity.
-     */
-    private fun launchAdRemovalPurchase() {
-        // Launch purchase flow via MainActivity
-        val mainActivity = requireActivity() as? MainActivity
-        if (mainActivity != null) {
-            val success = mainActivity.launchAdRemovalPurchase()
-            if (success) {
-                Toast.makeText(
-                    requireContext(),
-                    "Launching purchase flow...",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Billing not available. Please try again later.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "Error: Unable to launch purchase flow",
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 

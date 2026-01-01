@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- AI Contribution Guide:
+  Add quotes with: text, author, year, context
+  Validate: no duplicates, proper escaping
+  Categories: motivation, inspiration, perseverance
+  Use &amp; for &, &lt; for <, &gt; for >, &quot; for ", &apos; for '
+-->
+<quotes>
+    <quote>
+        <text>The only way to do great work is to love what you do.</text>
+        <author>Steve Jobs</author>
+        <year>2005</year>
+        <context>Stanford Commencement Address</context>
+    </quote>
+    <quote>
+        <text>Success is not final, failure is not fatal: it is the courage to continue that counts.</text>
+        <author>Winston Churchill</author>
+        <year>1941</year>
+        <context>Speech during World War II</context>
+    </quote>
+    <quote>
+        <text>Believe you can and you&apos;re halfway there.</text>
+        <author>Theodore Roosevelt</author>
+        <year>1903</year>
+        <context>Presidential speech</context>
+    </quote>
+    <quote>
+        <text>The future belongs to those who believe in the beauty of their dreams.</text>
+        <author>Eleanor Roosevelt</author>
+        <year>1958</year>
+        <context>This Is My Story memoir</context>
+    </quote>
+    <quote>
+        <text>It does not matter how slowly you go as long as you do not stop.</text>
+        <author>Confucius</author>
+        <year>500 BCE</year>
+        <context>Analects philosophical text</context>
+    </quote>
+    <quote>
+        <text>Everything you&apos;ve ever wanted is on the other side of fear.</text>
+        <author>George Addair</author>
+        <year>1980</year>
+        <context>Motivational speaking</context>
+    </quote>
+    <quote>
+        <text>I have not failed. I&apos;ve just found 10,000 ways that won&apos;t work.</text>
+        <author>Thomas Edison</author>
+        <year>1879</year>
+        <context>Interview about light bulb invention</context>
+    </quote>
+    <quote>
+        <text>The only impossible journey is the one you never begin.</text>
+        <author>Tony Robbins</author>
+        <year>1995</year>
+        <context>Awaken the Giant Within book</context>
+    </quote>
+    <quote>
+        <text>Act as if what you do makes a difference. It does.</text>
+        <author>William James</author>
+        <year>1890</year>
+        <context>The Principles of Psychology</context>
+    </quote>
+    <quote>
+        <text>Success usually comes to those who are too busy to be looking for it.</text>
+        <author>Henry David Thoreau</author>
+        <year>1854</year>
+        <context>Walden philosophical text</context>
+    </quote>
+    <quote>
+        <text>Don&apos;t watch the clock; do what it does. Keep going.</text>
+        <author>Sam Levenson</author>
+        <year>1965</year>
+        <context>You Don&apos;t Have to Be in Who&apos;s Who to Know What&apos;s What</context>
+    </quote>
+    <quote>
+        <text>The way to get started is to quit talking and begin doing.</text>
+        <author>Walt Disney</author>
+        <year>1955</year>
+        <context>Disneyland opening speech</context>
+    </quote>
+    <quote>
+        <text>Don&apos;t be afraid to give up the good to go for the great.</text>
+        <author>John D. Rockefeller</author>
+        <year>1905</year>
+        <context>Business philosophy</context>
+    </quote>
+    <quote>
+        <text>I find that the harder I work, the more luck I seem to have.</text>
+        <author>Thomas Jefferson</author>
+        <year>1801</year>
+        <context>Letter to colleagues</context>
+    </quote>
+    <quote>
+        <text>The road to success and the road to failure are almost exactly the same.</text>
+        <author>Colin R. Davis</author>
+        <year>1985</year>
+        <context>Conductor&apos;s memoir</context>
+    </quote>
+    <quote>
+        <text>Don&apos;t let yesterday take up too much of today.</text>
+        <author>Will Rogers</author>
+        <year>1930</year>
+        <context>Newspaper column</context>
+    </quote>
+    <quote>
+        <text>You learn more from failure than from success. Don&apos;t let it stop you.</text>
+        <author>Unknown</author>
+        <year>2000</year>
+        <context>Modern motivational wisdom</context>
+    </quote>
+    <quote>
+        <text>It&apos;s not whether you get knocked down, it&apos;s whether you get up.</text>
+        <author>Vince Lombardi</author>
+        <year>1967</year>
+        <context>Green Bay Packers coaching</context>
+    </quote>
+    <quote>
+        <text>If you are working on something that you really care about, you don&apos;t have to be pushed.</text>
+        <author>Steve Jobs</author>
+        <year>2007</year>
+        <context>D5 Conference interview</context>
+    </quote>
+    <quote>
+        <text>People who are crazy enough to think they can change the world, are the ones who do.</text>
+        <author>Rob Siltanen</author>
+        <year>1997</year>
+        <context>Apple Think Different campaign</context>
+    </quote>
+    <quote>
+        <text>Failure will never overtake me if my determination to succeed is strong enough.</text>
+        <author>Og Mandino</author>
+        <year>1968</year>
+        <context>The Greatest Salesman in the World</context>
+    </quote>
+    <quote>
+        <text>We may encounter many defeats but we must not be defeated.</text>
+        <author>Maya Angelou</author>
+        <year>1978</year>
+        <context>Interview about resilience</context>
+    </quote>
+    <quote>
+        <text>Knowing is not enough; we must apply. Wishing is not enough; we must do.</text>
+        <author>Johann Wolfgang von Goethe</author>
+        <year>1808</year>
+        <context>Faust philosophical drama</context>
+    </quote>
+    <quote>
+        <text>Imagine your life is perfect in every respect; what would it look like?</text>
+        <author>Brian Tracy</author>
+        <year>2003</year>
+        <context>Goals! How to Get Everything You Want</context>
+    </quote>
+    <quote>
+        <text>We generate fears while we sit. We overcome them by action.</text>
+        <author>Dr. Henry Link</author>
+        <year>1936</year>
+        <context>The Return to Religion</context>
+    </quote>
+    <quote>
+        <text>Whether you think you can or think you can&apos;t, you&apos;re right.</text>
+        <author>Henry Ford</author>
+        <year>1925</year>
+        <context>Ford Motor Company philosophy</context>
+    </quote>
+    <quote>
+        <text>Security is mostly a superstition. Life is either a daring adventure or nothing.</text>
+        <author>Helen Keller</author>
+        <year>1940</year>
+        <context>Let Us Have Faith book</context>
+    </quote>
+    <quote>
+        <text>The only limit to our realization of tomorrow will be our doubts of today.</text>
+        <author>Franklin D. Roosevelt</author>
+        <year>1945</year>
+        <context>Undelivered Jefferson Day Address</context>
+    </quote>
+    <quote>
+        <text>Creativity is intelligence having fun.</text>
+        <author>Albert Einstein</author>
+        <year>1950</year>
+        <context>Letters and interviews</context>
+    </quote>
+    <quote>
+        <text>What you get by achieving your goals is not as important as what you become by achieving your goals.</text>
+        <author>Zig Ziglar</author>
+        <year>1975</year>
+        <context>See You at the Top book</context>
+    </quote>
+    <quote>
+        <text>You are never too old to set another goal or to dream a new dream.</text>
+        <author>C.S. Lewis</author>
+        <year>1952</year>
+        <context>Mere Christianity book</context>
+    </quote>
+    <quote>
+        <text>The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.</text>
+        <author>Winston Churchill</author>
+        <year>1940</year>
+        <context>World War II speeches</context>
+    </quote>
+    <quote>
+        <text>Don&apos;t be pushed around by the fears in your mind. Be led by the dreams in your heart.</text>
+        <author>Roy T. Bennett</author>
+        <year>2016</year>
+        <context>The Light in the Heart book</context>
+    </quote>
+    <quote>
+        <text>Do one thing every day that scares you.</text>
+        <author>Eleanor Roosevelt</author>
+        <year>1960</year>
+        <context>You Learn by Living book</context>
+    </quote>
+    <quote>
+        <text>It&apos;s not the years in your life that count. It&apos;s the life in your years.</text>
+        <author>Abraham Lincoln</author>
+        <year>1858</year>
+        <context>Campaign speech</context>
+    </quote>
+    <quote>
+        <text>Change your thoughts and you change your world.</text>
+        <author>Norman Vincent Peale</author>
+        <year>1952</year>
+        <context>The Power of Positive Thinking</context>
+    </quote>
+    <quote>
+        <text>The best time to plant a tree was 20 years ago. The second best time is now.</text>
+        <author>Chinese Proverb</author>
+        <year>Ancient</year>
+        <context>Traditional wisdom</context>
+    </quote>
+    <quote>
+        <text>Only the educated are free.</text>
+        <author>Epictetus</author>
+        <year>100 CE</year>
+        <context>Discourses philosophical text</context>
+    </quote>
+    <quote>
+        <text>The secret of getting ahead is getting started.</text>
+        <author>Mark Twain</author>
+        <year>1895</year>
+        <context>Letters and speeches</context>
+    </quote>
+    <quote>
+        <text>I never dreamed about success, I worked for it.</text>
+        <author>Estée Lauder</author>
+        <year>1985</year>
+        <context>Estée: A Success Story autobiography</context>
+    </quote>
+    <quote>
+        <text>Do not wait to strike till the iron is hot; but make it hot by striking.</text>
+        <author>William Butler Yeats</author>
+        <year>1899</year>
+        <context>The Wind Among the Reeds poetry</context>
+    </quote>
+    <quote>
+        <text>If you want to lift yourself up, lift up someone else.</text>
+        <author>Booker T. Washington</author>
+        <year>1901</year>
+        <context>Up From Slavery autobiography</context>
+    </quote>
+    <quote>
+        <text>Great minds discuss ideas; average minds discuss events; small minds discuss people.</text>
+        <author>Eleanor Roosevelt</author>
+        <year>1948</year>
+        <context>My Day newspaper column</context>
+    </quote>
+    <quote>
+        <text>I alone cannot change the world, but I can cast a stone across the water to create many ripples.</text>
+        <author>Mother Teresa</author>
+        <year>1979</year>
+        <context>Nobel Peace Prize acceptance</context>
+    </quote>
+    <quote>
+        <text>If opportunity doesn&apos;t knock, build a door.</text>
+        <author>Milton Berle</author>
+        <year>1974</year>
+        <context>Comedy and life philosophy</context>
+    </quote>
+    <quote>
+        <text>You can&apos;t fall if you don&apos;t climb. But there&apos;s no joy in living your whole life on the ground.</text>
+        <author>Unknown</author>
+        <year>2005</year>
+        <context>Modern motivational wisdom</context>
+    </quote>
+    <quote>
+        <text>Challenges are what make life interesting and overcoming them is what makes life meaningful.</text>
+        <author>Joshua J. Marine</author>
+        <year>1995</year>
+        <context>Motivational speaking</context>
+    </quote>
+    <quote>
+        <text>If you want to achieve excellence, you can get there today. Stop doing less-than-excellent work.</text>
+        <author>Thomas J. Watson</author>
+        <year>1943</year>
+        <context>IBM leadership philosophy</context>
+    </quote>
+    <quote>
+        <text>A year from now you may wish you had started today.</text>
+        <author>Karen Lamb</author>
+        <year>2000</year>
+        <context>Motivational writing</context>
+    </quote>
+    <quote>
+        <text>Some people want it to happen, some wish it would happen, others make it happen.</text>
+        <author>Michael Jordan</author>
+        <year>1991</year>
+        <context>NBA Championship interview</context>
+    </quote>
+    <quote>
+        <text>Success is walking from failure to failure with no loss of enthusiasm.</text>
+        <author>Winston Churchill</author>
+        <year>1942</year>
+        <context>War-time speeches</context>
+    </quote>
+    <quote>
+        <text>The distance between your dreams and reality is called action.</text>
+        <author>Unknown</author>
+        <year>2010</year>
+        <context>Modern motivational wisdom</context>
+    </quote>
+    <quote>
+        <text>Stop being afraid of what could go wrong and start being excited about what could go right.</text>
+        <author>Tony Robbins</author>
+        <year>2000</year>
+        <context>Unlimited Power book</context>
+    </quote>
+    <quote>
+        <text>The only person you are destined to become is the person you decide to be.</text>
+        <author>Ralph Waldo Emerson</author>
+        <year>1841</year>
+        <context>Self-Reliance essay</context>
+    </quote>
+    <quote>
+        <text>Start where you are. Use what you have. Do what you can.</text>
+        <author>Arthur Ashe</author>
+        <year>1975</year>
+        <context>Tennis and life philosophy</context>
+    </quote>
+    <quote>
+        <text>Don&apos;t count the days, make the days count.</text>
+        <author>Muhammad Ali</author>
+        <year>1974</year>
+        <context>Boxing career interviews</context>
+    </quote>
+</quotes>

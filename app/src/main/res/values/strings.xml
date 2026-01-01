@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Calm Burst</string>
+
+    <!-- Home Screen -->
+    <string name="home_title">Today\'s Motivation</string>
+    <string name="no_quote_yet">Your first motivational quote will appear here</string>
+    <string name="quote_author">— %s</string>
+
+    <!-- Settings Screen -->
+    <string name="settings_title">Settings</string>
+    <string name="notification_interval">Notification Interval</string>
+    <string name="quiet_hours">Quiet Hours</string>
+    <string name="quiet_hours_start">Start Time</string>
+    <string name="quiet_hours_end">End Time</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="remove_ads_description">One-time purchase to remove all ads</string>
+    <string name="ads_removed">Ads Removed!</string>
+    <string name="purchase_price">$1.00</string>
+
+    <!-- Notification Intervals -->
+    <string name="interval_short">Every 1–2 hours</string>
+    <string name="interval_medium">Every 1–6 hours</string>
+    <string name="interval_long">Every 1–12 hours</string>
+    <string name="interval_daily">Every 1–24 hours</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Motivational Quotes</string>
+    <string name="notification_channel_description">Receive inspiring quotes throughout the day</string>
+    <string name="notification_title">Calm Burst</string>
+
+    <!-- Accessibility -->
+    <string name="quote_text_description">Motivational quote text</string>
+    <string name="settings_icon_description">Open settings</string>
+
+    <!-- Errors -->
+    <string name="error_loading_quote">Unable to load quote</string>
+    <string name="error_purchase_failed">Purchase failed. Please try again.</string>
+    <string name="error_billing_unavailable">In-app purchases are not available</string>
+
+    <!-- Permissions -->
+    <string name="notification_permission_rationale">Allow notifications to receive motivational quotes throughout the day</string>
+    <string name="notification_permission_denied">You won\'t receive notifications without this permission</string>
+</resources>

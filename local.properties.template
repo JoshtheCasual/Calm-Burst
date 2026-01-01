@@ -1,0 +1,13 @@
+## This file must be created as local.properties (git-ignored)
+## It contains SDK paths and API keys
+
+# SDK Location
+sdk.dir=/path/to/Android/sdk
+
+# AdMob Configuration (get from https://admob.google.com)
+ADMOB_APP_ID=ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy
+ADMOB_BANNER_ID=ca-app-pub-xxxxxxxxxxxxxxxx/zzzzzzzzzz
+
+# For testing, use these test IDs:
+# ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713
+# ADMOB_BANNER_ID=ca-app-pub-3940256099942544/6300978111

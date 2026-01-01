@@ -13,10 +13,6 @@
     <string name="quiet_hours">Quiet Hours</string>
     <string name="quiet_hours_start">Start Time</string>
     <string name="quiet_hours_end">End Time</string>
-    <string name="remove_ads">Remove Ads</string>
-    <string name="remove_ads_description">One-time purchase to remove all ads</string>
-    <string name="ads_removed">Ads Removed!</string>
-    <string name="purchase_price">$1.00</string>
 
     <!-- Notification Intervals -->
     <string name="interval_short">Every 1–2 hours</string>
@@ -35,8 +31,6 @@
 
     <!-- Errors -->
     <string name="error_loading_quote">Unable to load quote</string>
-    <string name="error_purchase_failed">Purchase failed. Please try again.</string>
-    <string name="error_billing_unavailable">In-app purchases are not available</string>
 
     <!-- Permissions -->
     <string name="notification_permission_rationale">Allow notifications to receive motivational quotes throughout the day</string>

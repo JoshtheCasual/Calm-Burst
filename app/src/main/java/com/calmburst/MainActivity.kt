@@ -4,22 +4,12 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.calmburst.data.PreferencesManager
 import com.calmburst.databinding.ActivityMainBinding
 import com.calmburst.ui.HomeFragment
-import com.calmburst.util.BillingHelper
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
 
 /**
  * Main activity for Calm Burst app.
@@ -27,8 +17,6 @@ import kotlinx.coroutines.flow.collect
  * Implements a single-activity architecture with fragment-based navigation.
  * Responsibilities:
  * - Request POST_NOTIFICATIONS permission on Android 13+ (API 33+)
- * - Initialize and display AdMob banner ad at the bottom
- * - Hide ads if user has purchased ad removal
  * - Manage fragment navigation between HomeFragment and SettingsFragment
  * - Set up initial fragment (HomeFragment) on first launch
  *
@@ -39,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var preferencesManager: PreferencesManager
-    private lateinit var billingHelper: BillingHelper
-    private var adView: AdView? = null
 
     /**
      * Permission launcher for requesting POST_NOTIFICATIONS permission.
@@ -66,12 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         // Request notification permission on Android 13+
         requestNotificationPermission()
-
-        // Initialize BillingHelper
-        initializeBilling()
-
-        // Initialize AdMob
-        initializeAdMob()
 
         // Initialize fragments only on first creation
         if (savedInstanceState == null) {
@@ -106,76 +86,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Initializes Google Play Billing for in-app purchases.
-     * Sets up purchase listener to handle ad removal purchases.
-     */
-    private fun initializeBilling() {
-        billingHelper = BillingHelper(this, preferencesManager)
-
-        // Initialize billing with purchase update listener
-        billingHelper.initialize { purchased ->
-            // Hide or show ads based on purchase status
-            if (purchased) {
-                hideAds()
-            } else {
-                loadBannerAd()
-            }
-        }
-    }
-
-    /**
-     * Initializes AdMob SDK and loads the banner ad.
-     * Checks if user has purchased ad removal before displaying ads.
-     */
-    private fun initializeAdMob() {
-        lifecycleScope.launch {
-            // Check if ads are removed
-            preferencesManager.adRemovalPurchased.collect { adsRemoved ->
-                if (adsRemoved) {
-                    // User purchased ad removal - hide ads
-                    hideAds()
-                } else {
-                    // Show ads
-                    loadBannerAd()
-                }
-            }
-        }
-    }
-
-    /**
-     * Loads and displays the AdMob banner ad at the bottom of the screen.
-     * Uses test ad unit ID from BuildConfig.
-     */
-    private fun loadBannerAd() {
-        // Initialize Mobile Ads SDK
-        MobileAds.initialize(this) {}
-
-        // Create AdView
-        adView = AdView(this).apply {
-            adUnitId = BuildConfig.ADMOB_BANNER_ID
-            setAdSize(AdSize.BANNER)
-        }
-
-        // Add AdView to container
-        binding.adContainer.removeAllViews()
-        binding.adContainer.addView(adView)
-        binding.adContainer.visibility = View.VISIBLE
-
-        // Load ad
-        val adRequest = AdRequest.Builder().build()
-        adView?.loadAd(adRequest)
-    }
-
-    /**
-     * Hides the ad container when user has purchased ad removal.
-     */
-    private fun hideAds() {
-        binding.adContainer.visibility = View.GONE
-        adView?.destroy()
-        adView = null
-    }
-
-    /**
      * Displays the HomeFragment as the current fragment.
      * This is the default landing screen showing the last motivational quote.
      */
@@ -197,20 +107,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Launches the in-app purchase flow for ad removal.
-     * Call this from SettingsFragment when user clicks "Remove Ads" button.
-     *
-     * @return true if purchase flow launched successfully, false otherwise
-     */
-    fun launchAdRemovalPurchase(): Boolean {
-        return if (billingHelper.isBillingAvailable()) {
-            billingHelper.launchPurchaseFlow()
-        } else {
-            false
-        }
-    }
-
-    /**
      * Gets the PreferencesManager instance.
      * Call this from fragments to access user preferences.
      */
@@ -218,19 +114,7 @@ class MainActivity : AppCompatActivity() {
         return preferencesManager
     }
 
-    override fun onPause() {
-        adView?.pause()
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        adView?.resume()
-    }
-
     override fun onDestroy() {
-        adView?.destroy()
-        billingHelper.endConnection()
         super.onDestroy()
     }
 }

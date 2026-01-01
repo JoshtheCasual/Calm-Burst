@@ -15,21 +15,6 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        // Load AdMob IDs from local.properties
-        val properties = java.util.Properties()
-        val localPropertiesFile = rootProject.file("local.properties")
-        if (localPropertiesFile.exists()) {
-            properties.load(localPropertiesFile.inputStream())
-            buildConfigField("String", "ADMOB_APP_ID", "\"${properties.getProperty("ADMOB_APP_ID", "")}\"")
-            buildConfigField("String", "ADMOB_BANNER_ID", "\"${properties.getProperty("ADMOB_BANNER_ID", "")}\"")
-            manifestPlaceholders["ADMOB_APP_ID"] = properties.getProperty("ADMOB_APP_ID", "")
-        } else {
-            // Fallback to test IDs if local.properties doesn't exist
-            buildConfigField("String", "ADMOB_APP_ID", "\"ca-app-pub-3940256099942544~3347511713\"")
-            buildConfigField("String", "ADMOB_BANNER_ID", "\"ca-app-pub-3940256099942544/6300978111\"")
-            manifestPlaceholders["ADMOB_APP_ID"] = "ca-app-pub-3940256099942544~3347511713"
-        }
     }
 
     buildTypes {
@@ -83,12 +68,6 @@ dependencies {
 
     // DataStore for preferences
     implementation("androidx.datastore:datastore-preferences:1.0.0")
-
-    // Google AdMob
-    implementation("com.google.android.gms:play-services-ads:22.6.0")
-
-    // Google Play Billing Library
-    implementation("com.android.billingclient:billing-ktx:6.1.0")
 
     // Kotlin Coroutines (explicit for Flow operators like first())
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

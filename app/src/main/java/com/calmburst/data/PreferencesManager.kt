@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.first
  * - Last shown quote (text, author, year, context)
  * - Notification interval settings
  * - Quiet hours configuration (start and end times)
- * - Ad removal purchase status
  *
  * All data access is done via Flow for reactive updates and coroutines for
  * asynchronous operations.
@@ -67,9 +66,6 @@ class PreferencesManager(private val context: Context) {
         // Quiet hours settings (stored as hour * 60 + minute for easier comparison)
         val QUIET_HOURS_START = intPreferencesKey("quiet_hours_start")
         val QUIET_HOURS_END = intPreferencesKey("quiet_hours_end")
-
-        // Purchase status
-        val AD_REMOVAL_PURCHASED = booleanPreferencesKey("ad_removal_purchased")
     }
 
     /**
@@ -211,21 +207,6 @@ class PreferencesManager(private val context: Context) {
             Pair(8, 0) // Default: 8 AM
         }
     }
-
-    // ========== Purchase Status Flow ==========
-
-    /**
-     * Flow that emits the ad removal purchase status.
-     *
-     * Returns true if the user has purchased ad removal, false otherwise.
-     */
-    val adRemovalPurchased: Flow<Boolean> = context.dataStore.data
-        .map { preferences -> preferences[PreferenceKeys.AD_REMOVAL_PURCHASED] ?: false }
-
-    /**
-     * Alias for [adRemovalPurchased] for backward compatibility.
-     */
-    val adsRemoved: Flow<Boolean> = adRemovalPurchased
 
     // ========== Save Functions ==========
 
@@ -376,26 +357,6 @@ class PreferencesManager(private val context: Context) {
         context.dataStore.edit { preferences ->
             preferences.remove(PreferenceKeys.QUIET_HOURS_START)
             preferences.remove(PreferenceKeys.QUIET_HOURS_END)
-        }
-    }
-
-    /**
-     * Saves the ad removal purchase status.
-     *
-     * This should be called after a successful in-app purchase to hide ads.
-     *
-     * @param purchased True if the user has purchased ad removal
-     *
-     * Example:
-     * ```
-     * lifecycleScope.launch {
-     *     prefsManager.saveAdRemovalPurchased(true)
-     * }
-     * ```
-     */
-    suspend fun saveAdRemovalPurchased(purchased: Boolean) {
-        context.dataStore.edit { preferences ->
-            preferences[PreferenceKeys.AD_REMOVAL_PURCHASED] = purchased
         }
     }
 

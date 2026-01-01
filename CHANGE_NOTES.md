@@ -4,6 +4,77 @@ Project milestone history and commit messages.
 
 ---
 
+## v1.0.1 - 2026-01-01
+
+### What Changed
+
+**Automated Build Infrastructure**:
+- GitHub Actions workflow for automatic APK builds on push
+- Docker-based build system (build without local Android SDK)
+- Interactive build.sh script for local builds
+- docker-build.sh script for containerized builds
+- HOW_TO_BUILD.md with comprehensive build instructions
+
+**Build Options**:
+1. **Local Build**: Using Android Studio or ./build.sh (requires Android SDK)
+2. **Docker Build**: Using ./docker-build.sh (no SDK needed, just Docker)
+3. **CI/CD Build**: Automatic via GitHub Actions on every push
+
+**GitHub Actions Features**:
+- Automatically builds debug APK on push to any branch
+- Uploads APK as downloadable artifact (30-day retention)
+- Provides SHA256 hash for verification
+- Ready for release builds with secrets configuration
+
+### Security Fixes Applied
+- N/A (build tooling only)
+
+### Why
+
+**Enable Easy Building**:
+- Users can build APK without manual Android SDK setup
+- Multiple build methods for different environments
+- Automated builds ensure code always compiles
+- GitHub Actions provides downloadable APKs for testing
+
+**Simplify Deployment**:
+- Docker build works on any system with Docker installed
+- GitHub Actions builds APK automatically on each commit
+- Build scripts handle environment setup automatically
+
+### Verification
+
+**Build Scripts**:
+- ✅ build.sh created and tested (requires Android SDK)
+- ✅ docker-build.sh created (requires Docker)
+- ✅ GitHub Actions workflow configured
+- ✅ Dockerfile configured with Android SDK
+
+**Documentation**:
+- ✅ HOW_TO_BUILD.md created with step-by-step instructions
+- ✅ All build methods documented
+- ✅ Troubleshooting section included
+
+**Note**: APK will be automatically built by GitHub Actions when pushed to repository.
+
+### Deliverables
+
+**Build Scripts**:
+- build.sh - Interactive local build script
+- docker-build.sh - Docker-based build script
+- Dockerfile - Container definition with Android SDK
+- .github/workflows/build-apk.yml - GitHub Actions workflow
+
+**Documentation**:
+- HOW_TO_BUILD.md - Comprehensive build guide
+
+**Automated Builds**:
+- GitHub Actions will build APK on every push
+- APK available as artifact in Actions tab
+- No manual build required for testing
+
+---
+
 ## v1.0.0 - 2026-01-01
 
 ### What Changed

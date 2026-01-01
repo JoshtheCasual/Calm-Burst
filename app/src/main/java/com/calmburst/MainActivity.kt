@@ -19,6 +19,7 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
 /**
  * Main activity for Calm Burst app.

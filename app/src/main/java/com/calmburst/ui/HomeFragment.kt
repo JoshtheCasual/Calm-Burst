@@ -11,6 +11,7 @@ import com.calmburst.R
 import com.calmburst.data.PreferencesManager
 import com.calmburst.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.collect
 
 /**
  * Home fragment displaying the last shown motivational quote.

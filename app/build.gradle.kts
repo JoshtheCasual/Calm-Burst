@@ -90,6 +90,10 @@ dependencies {
     // Google Play Billing Library
     implementation("com.android.billingclient:billing-ktx:6.1.0")
 
+    // Kotlin Coroutines (explicit for Flow operators like first())
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
     // XML Parsing (included in Android SDK)
     // No additional dependency needed for basic XML parsing
 

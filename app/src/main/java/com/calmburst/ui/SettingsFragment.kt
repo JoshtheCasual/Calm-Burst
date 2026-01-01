@@ -15,6 +15,7 @@ import com.calmburst.databinding.FragmentSettingsBinding
 import com.calmburst.util.BillingHelper
 import com.calmburst.worker.NotificationScheduler
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.first
 import java.util.Calendar
 
 /**

@@ -1,0 +1,62 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master, claude/** ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'gradle'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Create local.properties
+      run: |
+        echo "sdk.dir=$ANDROID_HOME" > local.properties
+        echo "ADMOB_APP_ID=ca-app-pub-3940256099942544~3347511713" >> local.properties
+        echo "ADMOB_BANNER_ID=ca-app-pub-3940256099942544/6300978111" >> local.properties
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --stacktrace
+
+    - name: Upload Debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: calm-burst-debug-apk
+        path: app/build/outputs/apk/debug/app-debug.apk
+        retention-days: 30
+
+    - name: Get APK info
+      run: |
+        APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+        if [ -f "$APK_PATH" ]; then
+          echo "✅ APK built successfully!"
+          echo "Size: $(du -h $APK_PATH | cut -f1)"
+          echo "SHA256: $(sha256sum $APK_PATH | cut -d' ' -f1)"
+        fi
+
+    # Optional: Build release APK (requires secrets for signing)
+    # - name: Build Release APK
+    #   if: github.ref == 'refs/heads/main'
+    #   run: ./gradlew assembleRelease
+    #   env:
+    #     KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+    #     KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}

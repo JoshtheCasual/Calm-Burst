@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Network Security Configuration for Calm Burst Android App
+
+    This file configures network security policies to protect against common
+    network-based attacks and enforce secure communication standards.
+
+    Security Features:
+    - Blocks all cleartext (HTTP) traffic in production
+    - Enforces HTTPS for all network connections
+    - Uses system certificate authorities for TLS validation
+    - Allows user certificates in debug builds for testing with proxies
+    - Allows localhost cleartext for development/debugging
+
+    Reference: https://developer.android.com/training/articles/security-config
+-->
+<network-security-config>
+    <!--
+        Base Configuration (Production)
+        Applied to all builds unless overridden by debug-overrides
+    -->
+    <base-config cleartextTrafficPermitted="false">
+        <!--
+            Trust only system-installed CA certificates
+            This prevents man-in-the-middle attacks using custom certificates
+        -->
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!--
+        Development Exception: Allow localhost for debugging
+        This permits cleartext traffic to localhost only (127.0.0.1, ::1)
+        Used for testing with local development servers
+    -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">127.0.0.1</domain>
+        <domain includeSubdomains="true">::1</domain>
+    </domain-config>
+
+    <!--
+        Debug Configuration (Development Only)
+        Applied only to debug builds (BuildConfig.DEBUG = true)
+
+        Allows user-installed certificates for testing with tools like:
+        - Charles Proxy
+        - Fiddler
+        - mitmproxy
+        - Burp Suite
+
+        NOTE: This does NOT affect release builds - they use base-config only
+    -->
+    <debug-overrides>
+        <trust-anchors>
+            <!-- System certificates (same as production) -->
+            <certificates src="system" />
+            <!-- User-installed certificates (debug only) -->
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Earthy Palette (Accessible - WCAG AA compliant) -->
+
+    <!-- Primary Colors -->
+    <color name="brown_900">#3E2723</color>  <!-- Text color -->
+    <color name="brown_700">#5D4037</color>  <!-- Primary -->
+    <color name="brown_300">#8D6E63</color>  <!-- Secondary -->
+    <color name="brown_200">#A1887F</color>  <!-- Accent -->
+    <color name="brown_50">#EFEBE9</color>   <!-- Background -->
+
+    <!-- Semantic Colors -->
+    <color name="primary">#5D4037</color>
+    <color name="primary_dark">#3E2723</color>
+    <color name="primary_light">#8D6E63</color>
+    <color name="accent">#A1887F</color>
+    <color name="background">#EFEBE9</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#3E2723</color>
+    <color name="text_secondary">#5D4037</color>
+
+    <!-- System Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="error">#B00020</color>
+</resources>

@@ -6,6 +6,67 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v1.0.1 Bug Fixes - 2026-01-02
+
+### What Changed
+
+**UI Layout Fix**:
+- Moved Settings button from bottom of home page to header area (top-right)
+- Fixed layout overlap issue where Settings button was covering quote text
+- Settings button now appears as an icon button in the header row next to title
+
+**Settings Fragment Crash Fix**:
+- Fixed crash when navigating to Settings screen
+- Changed from infinite `Flow.collect()` to one-time `Flow.first()` reads in loadSettings()
+- Prevents infinite collection loops that were causing UI update conflicts
+- Radio group listener now properly initialized after loading values to avoid triggering saves during load
+
+### Security Fixes Applied
+- N/A (bug fixes only)
+
+### Why
+- User testing of v1.0.0 revealed Settings button overlapping content
+- Navigation to Settings caused immediate crash due to Flow collection issues
+- Both fixes improve app stability and user experience
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (app-debug.apk, 6.4 MB)
+- SHA256: 70f76f796d09cbf489577252d74b6a1cfdeb14d8bd2c6060e650eb1759d5abe0
+
+---
+
+## v1.0.0 Release - 2026-01-02
+
+### What Changed
+
+**First Official Release Build**:
+- Built and verified debug APK using Docker build environment
+- Removed invalid README.md files from mipmap resource directories (build fix)
+- APK successfully compiled with all 56 motivational quotes
+- App is 100% free, ad-free, and offline-first
+
+**Build Details**:
+- APK Size: 6.4 MB
+- Min SDK: Android 8.0 (API 26)
+- Target SDK: Android 14 (API 34)
+- Version: 1.0.0 (versionCode 1)
+
+### Security Fixes Applied
+- N/A (clean build of existing codebase)
+
+### Why
+- First production-ready APK release
+- All development iterations (v1.0.0-v1.0.3) consolidated into releasable build
+- Users can now install and use the app
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (app-debug.apk, 6.4 MB)
+- SHA256: 295c226702dc6c1d0896d91352b7742c48538c969daf8b32bec2371e3c9b1b97
+
+---
+
 ## v1.0.3 - 2026-01-01
 
 ### What Changed

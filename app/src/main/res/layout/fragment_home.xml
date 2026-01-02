@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <!-- Title -->
+        <!-- Header Row with Title and Settings Button -->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title_text"
             android:layout_width="0dp"
@@ -22,8 +22,32 @@
             android:textColor="@color/text_primary"
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
-            android:paddingBottom="32dp"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/settings_button"
+            app:layout_constraintHorizontal_chainStyle="spread_inside" />
+
+        <!-- Settings Button - Now in header -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:contentDescription="@string/settings_icon_description"
+            app:icon="@android:drawable/ic_menu_preferences"
+            app:iconGravity="textStart"
+            app:cornerRadius="24dp"
+            style="@style/Widget.Material3.Button.IconButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title_text" />
+
+        <!-- Spacer below header -->
+        <View
+            android:id="@+id/header_spacer"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            app:layout_constraintTop_toBottomOf="@id/title_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -37,7 +61,7 @@
             app:cardElevation="4dp"
             app:cardCornerRadius="16dp"
             app:contentPadding="24dp"
-            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintTop_toBottomOf="@id/header_spacer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -120,28 +144,10 @@
             android:textAlignment="center"
             android:paddingTop="48dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/title_text"
+            app:layout_constraintTop_toBottomOf="@id/header_spacer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="gone" />
-
-        <!-- Settings Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/settings_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/settings_title"
-            android:textSize="16sp"
-            android:minHeight="48dp"
-            android:paddingHorizontal="32dp"
-            android:contentDescription="@string/settings_icon_description"
-            app:icon="@android:drawable/ic_menu_preferences"
-            app:iconGravity="start"
-            app:cornerRadius="24dp"
-            app:layout_constraintTop_toBottomOf="@id/quote_card"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

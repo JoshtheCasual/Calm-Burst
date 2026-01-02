@@ -82,23 +82,11 @@ class SettingsFragment : Fragment() {
 
     /**
      * Sets up click listeners for all interactive elements:
-     * - Radio buttons for interval selection
      * - Time picker buttons for quiet hours
      * - Back to home navigation button
+     * Note: Radio button listener is set up in loadSettings() to avoid triggering during load
      */
     private fun setupClickListeners() {
-        // Interval selection
-        binding.intervalRadioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val interval = when (checkedId) {
-                R.id.interval_short -> PreferencesManager.NotificationInterval.SHORT
-                R.id.interval_medium -> PreferencesManager.NotificationInterval.MEDIUM
-                R.id.interval_long -> PreferencesManager.NotificationInterval.LONG
-                R.id.interval_daily -> PreferencesManager.NotificationInterval.DAILY
-                else -> PreferencesManager.NotificationInterval.MEDIUM
-            }
-            saveInterval(interval)
-        }
-
         // Quiet hours time pickers
         binding.startTimeButton.setOnClickListener {
             showTimePickerDialog(true)
@@ -116,52 +104,60 @@ class SettingsFragment : Fragment() {
 
     /**
      * Loads saved settings from PreferencesManager and updates the UI.
-     * Observes settings changes using Kotlin Flows and lifecycleScope.
+     * Uses .first() for one-time reads to avoid infinite collection loops.
      */
     private fun loadSettings() {
-        // Load interval setting
         viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.notificationInterval.collect { interval ->
-                val radioButtonId = when (interval) {
-                    PreferencesManager.NotificationInterval.SHORT -> R.id.interval_short
-                    PreferencesManager.NotificationInterval.MEDIUM -> R.id.interval_medium
-                    PreferencesManager.NotificationInterval.LONG -> R.id.interval_long
-                    PreferencesManager.NotificationInterval.DAILY -> R.id.interval_daily
-                }
-                binding.intervalRadioGroup.check(radioButtonId)
-            }
-        }
+            // Temporarily remove listener to avoid triggering save during load
+            binding.intervalRadioGroup.setOnCheckedChangeListener(null)
 
-        // Load quiet hours start time (stored as minutes since midnight)
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.quietHoursStart.collect { minutesSinceMidnight ->
-                if (minutesSinceMidnight != null) {
-                    val (hour, minute) = preferencesManager.minutesToHourMinute(minutesSinceMidnight)
-                    startHour = hour
-                    startMinute = minute
-                } else {
-                    // Default values if not set
-                    startHour = 22
-                    startMinute = 0
-                }
-                updateStartTimeButton()
+            // Load interval setting (one-time read)
+            val interval = preferencesManager.notificationInterval.first()
+            val radioButtonId = when (interval) {
+                PreferencesManager.NotificationInterval.SHORT -> R.id.interval_short
+                PreferencesManager.NotificationInterval.MEDIUM -> R.id.interval_medium
+                PreferencesManager.NotificationInterval.LONG -> R.id.interval_long
+                PreferencesManager.NotificationInterval.DAILY -> R.id.interval_daily
             }
-        }
+            binding.intervalRadioGroup.check(radioButtonId)
 
-        // Load quiet hours end time (stored as minutes since midnight)
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.quietHoursEnd.collect { minutesSinceMidnight ->
-                if (minutesSinceMidnight != null) {
-                    val (hour, minute) = preferencesManager.minutesToHourMinute(minutesSinceMidnight)
-                    endHour = hour
-                    endMinute = minute
-                } else {
-                    // Default values if not set
-                    endHour = 8
-                    endMinute = 0
+            // Re-attach listener after loading
+            binding.intervalRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                val selectedInterval = when (checkedId) {
+                    R.id.interval_short -> PreferencesManager.NotificationInterval.SHORT
+                    R.id.interval_medium -> PreferencesManager.NotificationInterval.MEDIUM
+                    R.id.interval_long -> PreferencesManager.NotificationInterval.LONG
+                    R.id.interval_daily -> PreferencesManager.NotificationInterval.DAILY
+                    else -> PreferencesManager.NotificationInterval.MEDIUM
                 }
-                updateEndTimeButton()
+                saveInterval(selectedInterval)
             }
+
+            // Load quiet hours start time (one-time read)
+            val startMinutesSinceMidnight = preferencesManager.quietHoursStart.first()
+            if (startMinutesSinceMidnight != null) {
+                val (hour, minute) = preferencesManager.minutesToHourMinute(startMinutesSinceMidnight)
+                startHour = hour
+                startMinute = minute
+            } else {
+                // Default values if not set
+                startHour = 22
+                startMinute = 0
+            }
+            updateStartTimeButton()
+
+            // Load quiet hours end time (one-time read)
+            val endMinutesSinceMidnight = preferencesManager.quietHoursEnd.first()
+            if (endMinutesSinceMidnight != null) {
+                val (hour, minute) = preferencesManager.minutesToHourMinute(endMinutesSinceMidnight)
+                endHour = hour
+                endMinute = minute
+            } else {
+                // Default values if not set
+                endHour = 8
+                endMinute = 0
+            }
+            updateEndTimeButton()
         }
     }
 

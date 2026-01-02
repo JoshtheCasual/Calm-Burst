@@ -179,6 +179,9 @@ class SettingsFragment : Fragment() {
                 preferencesManager.saveNotificationInterval(interval)
                 // Reschedule notifications with new interval (hours)
                 notificationScheduler.scheduleNotifications(interval.maxHours)
+                context?.let {
+                    Toast.makeText(it, "Notification interval saved", Toast.LENGTH_SHORT).show()
+                }
             } catch (e: Exception) {
                 android.util.Log.e("SettingsFragment", "Error saving interval", e)
             }
@@ -245,6 +248,9 @@ class SettingsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 preferencesManager.saveQuietHoursStart(startHour, startMinute)
+                context?.let {
+                    Toast.makeText(it, "Quiet hours start time saved", Toast.LENGTH_SHORT).show()
+                }
             } catch (e: IllegalArgumentException) {
                 // Validation failed - show user-friendly error message
                 context?.let {
@@ -285,6 +291,9 @@ class SettingsFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 preferencesManager.saveQuietHoursEnd(endHour, endMinute)
+                context?.let {
+                    Toast.makeText(it, "Quiet hours end time saved", Toast.LENGTH_SHORT).show()
+                }
             } catch (e: IllegalArgumentException) {
                 // Validation failed - show user-friendly error message
                 context?.let {

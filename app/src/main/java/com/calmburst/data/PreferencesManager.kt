@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.first
 
+// DataStore extension property - MUST be at top level to ensure singleton
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "calm_burst_prefs")
+
 /**
  * Manages application preferences using Jetpack DataStore.
  *
@@ -43,9 +46,6 @@ import kotlinx.coroutines.flow.first
  * ```
  */
 class PreferencesManager(private val context: Context) {
-
-    // DataStore extension property for accessing preferences
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "calm_burst_prefs")
 
     /**
      * Preference keys for all stored data.

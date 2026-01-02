@@ -6,6 +6,38 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v1.0.4 Settings Persistence & UX Fixes - 2026-01-02
+
+### What Changed
+
+**Settings Persistence Fix**:
+- Fixed DataStore singleton issue that was causing settings not to persist
+- Moved DataStore extension property to top level of PreferencesManager.kt
+- This ensures all PreferencesManager instances share the same DataStore
+
+**Home Page Blank Fix**:
+- HomeFragment now loads quote in `onResume()` instead of only `onViewCreated()`
+- This ensures the quote is re-displayed after returning from Settings
+
+**Settings Feedback**:
+- Added Toast confirmations when settings are saved
+- Users now see "Notification interval saved" when changing interval
+- Users now see "Quiet hours start/end time saved" when changing quiet hours
+
+### Security Fixes Applied
+- N/A (bug fixes and UX improvements)
+
+### Why
+- Users reported settings not saving after changing them
+- Users reported blank home page after returning from Settings
+- Toast feedback helps users confirm their settings were saved
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (binaries/calm-burst-v1.0.4-debug-*.apk)
+
+---
+
 ## v1.0.3 Features & Bug Fixes - 2026-01-02
 
 ### What Changed

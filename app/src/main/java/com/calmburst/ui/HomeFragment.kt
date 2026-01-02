@@ -61,6 +61,11 @@ class HomeFragment : Fragment() {
         quoteRepository = QuoteRepository(requireContext())
 
         setupClickListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Load quote every time fragment becomes visible (including after returning from Settings)
         loadQuote()
     }
 

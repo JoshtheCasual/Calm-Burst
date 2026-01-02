@@ -6,6 +6,35 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v1.0.2 Bug Fixes - 2026-01-02
+
+### What Changed
+
+**Settings Fragment Crash Fix (Complete)**:
+- Added proper null checks for binding in all coroutine callbacks
+- All DataStore reads now complete before accessing UI elements
+- Added try-catch blocks around all async operations to prevent crashes
+- Fixed potential crash when fragment view is destroyed during async operations
+- Removed unused Calendar import
+
+**Build Organization**:
+- Created `binaries/` folder for APK releases
+- APKs now include version and timestamp in filename
+
+### Security Fixes Applied
+- N/A (stability fixes only)
+
+### Why
+- Previous fix (v1.0.1) did not fully address the Settings crash
+- Root cause: binding accessed after async DataStore operations when view may be destroyed
+- Now all async operations complete first, then check if view is still valid before updating UI
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (binaries/calm-burst-v1.0.2-debug-*.apk, 6.4 MB)
+
+---
+
 ## v1.0.1 Bug Fixes - 2026-01-02
 
 ### What Changed

@@ -6,6 +6,7 @@
     <string name="home_title">Today\'s Motivation</string>
     <string name="no_quote_yet">Your first motivational quote will appear here</string>
     <string name="quote_author">— %s</string>
+    <string name="new_quote">New Quote</string>
 
     <!-- Settings Screen -->
     <string name="settings_title">Settings</string>

@@ -9,15 +9,16 @@ import androidx.lifecycle.lifecycleScope
 import com.calmburst.MainActivity
 import com.calmburst.R
 import com.calmburst.data.PreferencesManager
+import com.calmburst.data.QuoteRepository
 import com.calmburst.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 
 /**
- * Home fragment displaying the last shown motivational quote.
+ * Home fragment displaying the current motivational quote.
  *
  * This fragment serves as the main landing screen for the Calm Burst app.
- * It displays the most recently shown motivational quote, including:
+ * It displays a motivational quote including:
  * - Quote text (large, readable serif font)
  * - Author attribution
  * - Year of origin
@@ -28,13 +29,12 @@ import kotlinx.coroutines.flow.collect
  * - Earthy color palette for a calming visual experience
  * - Full accessibility support with content descriptions
  * - Large touch targets (minimum 48dp) for easy interaction
- * - Empty state message when no quote has been shown yet
+ * - Loads a random quote on first open
+ * - Button to load a new random quote
  * - Navigation button to settings screen
  *
- * The quote data is retrieved from [PreferencesManager] which stores the
- * last notification's quote information.
- *
  * @see com.calmburst.data.PreferencesManager
+ * @see com.calmburst.data.QuoteRepository
  * @see SettingsFragment
  */
 class HomeFragment : Fragment() {
@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var preferencesManager: PreferencesManager
+    private lateinit var quoteRepository: QuoteRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,81 +58,115 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         preferencesManager = PreferencesManager(requireContext())
+        quoteRepository = QuoteRepository(requireContext())
 
         setupClickListeners()
-        loadLastQuote()
+        loadQuote()
     }
 
     /**
      * Sets up click listeners for interactive elements.
-     * Currently handles navigation to SettingsFragment.
      */
     private fun setupClickListeners() {
         binding.settingsButton.setOnClickListener {
             navigateToSettings()
         }
+
+        binding.newQuoteButton.setOnClickListener {
+            loadNewRandomQuote()
+        }
     }
 
     /**
-     * Loads and displays the last shown quote from preferences.
-     * If no quote exists, shows an empty state message.
+     * Loads the current quote from preferences, or a random one if none exists.
      */
-    private fun loadLastQuote() {
+    private fun loadQuote() {
         viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.lastQuoteText.collect { quoteText ->
-                if (quoteText.isNullOrEmpty()) {
-                    showEmptyState()
+            try {
+                // Check if we have a saved quote
+                val savedQuoteText = preferencesManager.lastQuoteText.first()
+
+                if (savedQuoteText.isNullOrEmpty()) {
+                    // No saved quote - load a random one
+                    loadNewRandomQuote()
                 } else {
-                    showQuote(quoteText)
+                    // Load saved quote data
+                    val author = preferencesManager.lastQuoteAuthor.first()
+                    val year = preferencesManager.lastQuoteYear.first()
+                    val context = preferencesManager.lastQuoteContext.first()
+
+                    // Update UI (check binding is still valid)
+                    _binding?.let { b ->
+                        displayQuote(savedQuoteText, author, year, context)
+                    }
                 }
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.lastQuoteAuthor.collect { author ->
-                binding.authorText.text = getString(R.string.quote_author, author ?: "Unknown")
-                binding.authorText.visibility = if (author.isNullOrEmpty()) View.GONE else View.VISIBLE
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.lastQuoteYear.collect { year ->
-                binding.yearText.text = year ?: ""
-                binding.yearText.visibility = if (year.isNullOrEmpty()) View.GONE else View.VISIBLE
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            preferencesManager.lastQuoteContext.collect { context ->
-                binding.contextText.text = context ?: ""
-                binding.contextText.visibility = if (context.isNullOrEmpty()) View.GONE else View.VISIBLE
+            } catch (e: Exception) {
+                android.util.Log.e("HomeFragment", "Error loading quote", e)
+                // Try to load a new quote on error
+                loadNewRandomQuote()
             }
         }
     }
 
     /**
-     * Displays the quote text and shows the quote card.
-     *
-     * @param quoteText The motivational quote text to display
+     * Loads a new random quote from the repository and saves it.
      */
-    private fun showQuote(quoteText: String) {
-        binding.quoteText.text = quoteText
-        binding.quoteCard.visibility = View.VISIBLE
-        binding.emptyStateText.visibility = View.GONE
+    private fun loadNewRandomQuote() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // Get a random quote from the repository
+                val quote = quoteRepository.getRandomQuote()
+
+                // Save it to preferences
+                preferencesManager.saveLastQuote(quote)
+
+                // Update UI (check binding is still valid)
+                _binding?.let {
+                    displayQuote(quote.text, quote.author, quote.year, quote.context)
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("HomeFragment", "Error loading new quote", e)
+            }
+        }
     }
 
     /**
-     * Shows the empty state when no quote has been displayed yet.
-     * Hides the quote card and displays a placeholder message.
+     * Displays a quote in the UI.
      */
-    private fun showEmptyState() {
-        binding.quoteCard.visibility = View.GONE
-        binding.emptyStateText.visibility = View.VISIBLE
+    private fun displayQuote(text: String, author: String?, year: String?, context: String?) {
+        val b = _binding ?: return
+
+        b.quoteText.text = text
+        b.quoteCard.visibility = View.VISIBLE
+        b.emptyStateText.visibility = View.GONE
+
+        // Author
+        if (!author.isNullOrEmpty()) {
+            b.authorText.text = getString(R.string.quote_author, author)
+            b.authorText.visibility = View.VISIBLE
+        } else {
+            b.authorText.visibility = View.GONE
+        }
+
+        // Year
+        if (!year.isNullOrEmpty()) {
+            b.yearText.text = year
+            b.yearText.visibility = View.VISIBLE
+        } else {
+            b.yearText.visibility = View.GONE
+        }
+
+        // Context
+        if (!context.isNullOrEmpty()) {
+            b.contextText.text = context
+            b.contextText.visibility = View.VISIBLE
+        } else {
+            b.contextText.visibility = View.GONE
+        }
     }
 
     /**
      * Navigates to the SettingsFragment.
-     * Uses the MainActivity's navigation method to handle the fragment transaction.
      */
     private fun navigateToSettings() {
         (activity as? MainActivity)?.showSettingsFragment()

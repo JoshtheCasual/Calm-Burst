@@ -6,6 +6,43 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v1.0.3 Features & Bug Fixes - 2026-01-02
+
+### What Changed
+
+**Back to Home Navigation Fix**:
+- Fixed crash when clicking "Back to Home" button in Settings
+- Now uses `popBackStack()` instead of creating a new fragment
+
+**Quote Loading on App Open**:
+- App now loads a random quote from the database when opened
+- If a quote was previously shown, it displays that quote
+- No more empty state on first launch
+
+**New Quote Button**:
+- Added "New Quote" button on home screen
+- Click to load a fresh random quote from the 56-quote database
+- Quote is saved to preferences so it persists across app restarts
+
+**Code Improvements**:
+- HomeFragment rewritten with proper async handling
+- Uses QuoteRepository to load quotes from quotes.xml
+- All binding access is null-safe
+
+### Security Fixes Applied
+- N/A (feature additions and bug fixes)
+
+### Why
+- Users reported crash when navigating back from Settings
+- Users wanted to see a quote immediately on app open
+- Users wanted ability to refresh and see a new quote
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (binaries/calm-burst-v1.0.3-debug-*.apk, 6.4 MB)
+
+---
+
 ## v1.0.2 Bug Fixes - 2026-01-02
 
 ### What Changed

@@ -315,10 +315,10 @@ class SettingsFragment : Fragment() {
 
     /**
      * Navigates back to the HomeFragment.
-     * Uses the MainActivity's navigation method to handle the fragment transaction.
+     * Pops the back stack to return to the previous fragment.
      */
     private fun navigateToHome() {
-        (activity as? MainActivity)?.showHomeFragment()
+        parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {

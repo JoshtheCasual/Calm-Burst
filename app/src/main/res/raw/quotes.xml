@@ -13,46 +13,16 @@
         <context>Stanford Commencement Address</context>
     </quote>
     <quote>
-        <text>Success is not final, failure is not fatal: it is the courage to continue that counts.</text>
-        <author>Winston Churchill</author>
-        <year>1941</year>
-        <context>Speech during World War II</context>
-    </quote>
-    <quote>
-        <text>Believe you can and you&apos;re halfway there.</text>
-        <author>Theodore Roosevelt</author>
-        <year>1903</year>
-        <context>Presidential speech</context>
-    </quote>
-    <quote>
-        <text>The future belongs to those who believe in the beauty of their dreams.</text>
-        <author>Eleanor Roosevelt</author>
-        <year>1958</year>
-        <context>This Is My Story memoir</context>
-    </quote>
-    <quote>
         <text>It does not matter how slowly you go as long as you do not stop.</text>
         <author>Confucius</author>
         <year>500 BCE</year>
         <context>Analects philosophical text</context>
     </quote>
     <quote>
-        <text>Everything you&apos;ve ever wanted is on the other side of fear.</text>
-        <author>George Addair</author>
-        <year>1980</year>
-        <context>Motivational speaking</context>
-    </quote>
-    <quote>
         <text>I have not failed. I&apos;ve just found 10,000 ways that won&apos;t work.</text>
         <author>Thomas Edison</author>
         <year>1879</year>
         <context>Interview about light bulb invention</context>
-    </quote>
-    <quote>
-        <text>The only impossible journey is the one you never begin.</text>
-        <author>Tony Robbins</author>
-        <year>1995</year>
-        <context>Awaken the Giant Within book</context>
     </quote>
     <quote>
         <text>Act as if what you do makes a difference. It does.</text>
@@ -75,8 +45,8 @@
     <quote>
         <text>The way to get started is to quit talking and begin doing.</text>
         <author>Walt Disney</author>
-        <year>1955</year>
-        <context>Disneyland opening speech</context>
+        <year>1957</year>
+        <context>Interview about obtaining bank financing</context>
     </quote>
     <quote>
         <text>Don&apos;t be afraid to give up the good to go for the great.</text>
@@ -175,22 +145,10 @@
         <context>Undelivered Jefferson Day Address</context>
     </quote>
     <quote>
-        <text>Creativity is intelligence having fun.</text>
-        <author>Albert Einstein</author>
-        <year>1950</year>
-        <context>Letters and interviews</context>
-    </quote>
-    <quote>
         <text>What you get by achieving your goals is not as important as what you become by achieving your goals.</text>
         <author>Zig Ziglar</author>
         <year>1975</year>
         <context>See You at the Top book</context>
-    </quote>
-    <quote>
-        <text>You are never too old to set another goal or to dream a new dream.</text>
-        <author>C.S. Lewis</author>
-        <year>1952</year>
-        <context>Mere Christianity book</context>
     </quote>
     <quote>
         <text>The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.</text>
@@ -211,12 +169,6 @@
         <context>You Learn by Living book</context>
     </quote>
     <quote>
-        <text>It&apos;s not the years in your life that count. It&apos;s the life in your years.</text>
-        <author>Abraham Lincoln</author>
-        <year>1858</year>
-        <context>Campaign speech</context>
-    </quote>
-    <quote>
         <text>Change your thoughts and you change your world.</text>
         <author>Norman Vincent Peale</author>
         <year>1952</year>
@@ -235,12 +187,6 @@
         <context>Discourses philosophical text</context>
     </quote>
     <quote>
-        <text>The secret of getting ahead is getting started.</text>
-        <author>Mark Twain</author>
-        <year>1895</year>
-        <context>Letters and speeches</context>
-    </quote>
-    <quote>
         <text>I never dreamed about success, I worked for it.</text>
         <author>Estée Lauder</author>
         <year>1985</year>
@@ -257,12 +203,6 @@
         <author>Booker T. Washington</author>
         <year>1901</year>
         <context>Up From Slavery autobiography</context>
-    </quote>
-    <quote>
-        <text>Great minds discuss ideas; average minds discuss events; small minds discuss people.</text>
-        <author>Eleanor Roosevelt</author>
-        <year>1948</year>
-        <context>My Day newspaper column</context>
     </quote>
     <quote>
         <text>I alone cannot change the world, but I can cast a stone across the water to create many ripples.</text>
@@ -307,12 +247,6 @@
         <context>NBA Championship interview</context>
     </quote>
     <quote>
-        <text>Success is walking from failure to failure with no loss of enthusiasm.</text>
-        <author>Winston Churchill</author>
-        <year>1942</year>
-        <context>War-time speeches</context>
-    </quote>
-    <quote>
         <text>The distance between your dreams and reality is called action.</text>
         <author>Unknown</author>
         <year>2010</year>
@@ -325,21 +259,9 @@
         <context>Unlimited Power book</context>
     </quote>
     <quote>
-        <text>The only person you are destined to become is the person you decide to be.</text>
-        <author>Ralph Waldo Emerson</author>
-        <year>1841</year>
-        <context>Self-Reliance essay</context>
-    </quote>
-    <quote>
         <text>Start where you are. Use what you have. Do what you can.</text>
         <author>Arthur Ashe</author>
         <year>1975</year>
         <context>Tennis and life philosophy</context>
-    </quote>
-    <quote>
-        <text>Don&apos;t count the days, make the days count.</text>
-        <author>Muhammad Ali</author>
-        <year>1974</year>
-        <context>Boxing career interviews</context>
     </quote>
 </quotes>

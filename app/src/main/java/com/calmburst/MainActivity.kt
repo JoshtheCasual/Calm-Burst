@@ -7,9 +7,14 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.calmburst.data.PreferencesManager
 import com.calmburst.databinding.ActivityMainBinding
 import com.calmburst.ui.HomeFragment
+import com.calmburst.util.NotificationHelper
+import com.calmburst.worker.NotificationScheduler
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 /**
  * Main activity for Calm Burst app.
@@ -53,9 +58,32 @@ class MainActivity : AppCompatActivity() {
         // Request notification permission on Android 13+
         requestNotificationPermission()
 
+        // Create notification channel (required for Android 8.0+)
+        NotificationHelper(this).createNotificationChannel()
+
+        // Schedule notifications on app startup using saved preferences
+        initializeNotifications()
+
         // Initialize fragments only on first creation
         if (savedInstanceState == null) {
             showHomeFragment()
+        }
+    }
+
+    /**
+     * Initializes notification scheduling using saved preferences.
+     * Called on app startup to ensure notifications are scheduled.
+     */
+    private fun initializeNotifications() {
+        lifecycleScope.launch {
+            try {
+                val interval = preferencesManager.notificationInterval.first()
+                val scheduler = NotificationScheduler(this@MainActivity)
+                scheduler.scheduleNotifications(interval.maxHours)
+                android.util.Log.d("MainActivity", "Notifications initialized with interval: ${interval.maxHours} hours")
+            } catch (e: Exception) {
+                android.util.Log.e("MainActivity", "Failed to initialize notifications", e)
+            }
         }
     }
 

@@ -67,10 +67,9 @@ class NotificationScheduler(private val context: Context) {
      * ```
      */
     fun scheduleNotifications(intervalHours: Int = 6) {
-        // Define constraints to preserve battery life
-        val constraints = Constraints.Builder()
-            .setRequiresBatteryNotLow(true) // Don't run when battery is low
-            .build()
+        // No constraints - we want notifications to be delivered reliably
+        // Users expect motivational quotes even on low battery
+        val constraints = Constraints.Builder().build()
 
         // Calculate a random initial delay between 1 hour and the max interval
         // This makes notifications feel more natural and less predictable

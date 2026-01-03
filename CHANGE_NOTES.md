@@ -6,6 +6,39 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v1.0.5 Notification System Fix - 2026-01-02
+
+### What Changed
+
+**Critical: Notifications Now Work**:
+- Fixed notifications never being scheduled on app startup
+- Added notification channel creation on app launch (required for Android 8.0+)
+- Added notification scheduling initialization in MainActivity
+- Notifications now use saved interval preference or default (6 hours)
+
+**Reliability Improvements**:
+- Removed battery constraint that could block notifications when battery is low
+- Notifications will now be delivered reliably regardless of battery state
+
+**Technical Details**:
+- MainActivity now calls `NotificationHelper.createNotificationChannel()` on startup
+- MainActivity now calls `NotificationScheduler.scheduleNotifications()` on startup
+- WorkManager constraints relaxed for reliable delivery
+
+### Security Fixes Applied
+- N/A (functionality fix)
+
+### Why
+- Users reported no notifications received after 2+ hours of waiting
+- Root cause: notifications were never scheduled unless user changed settings
+- The notification channel was never created on startup
+
+### Verification
+- Build: PASS (Docker build successful)
+- APK Generated: PASS (binaries/calm-burst-v1.0.5-debug-*.apk)
+
+---
+
 ## v1.0.4 Settings Persistence & UX Fixes - 2026-01-02
 
 ### What Changed

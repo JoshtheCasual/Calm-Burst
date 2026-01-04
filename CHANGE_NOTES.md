@@ -225,7 +225,192 @@ If you're here, thanks for checking out the history of the app!
 
 ### Next Steps
 
-**Milestone 3: State Management & Business Logic** (Next)
+**Milestone 4: Capacitor Platform Setup** (Next)
+
+---
+
+## v2.0.0-alpha.3 Milestone 3: State Management & Business Logic - 2026-01-04
+
+### What Changed
+
+**Complete Business Logic Layer Implemented**:
+- QuoteService for loading and managing 56 quotes
+- StorageService for localStorage persistence (generic wrapper)
+- NotificationScheduler for scheduling logic with quiet hours
+- AppContext for global state management (React Context)
+- useQuotes hook for quote state management
+- useSettings hook for settings persistence
+- Full integration with UI components
+
+**QuoteService Features**:
+- Load all 56 quotes from quotes.json (8.75 kB bundle)
+- Memory caching for performance (load once)
+- `getAllQuotes()` - returns all quotes
+- `getRandomQuote(excludeIds)` - random selection, avoid repeats
+- `getQuoteById(id)` - specific quote lookup
+- Error handling for missing/invalid data
+- Concurrent request handling (shared loading promise)
+
+**StorageService Features**:
+- Generic TypeScript wrapper for localStorage
+- `get<T>(key, defaultValue)` - retrieve with fallback
+- `set<T>(key, value)` - save with JSON serialization
+- `remove(key)` - delete value
+- `clear()` - clear all storage
+- Error handling for localStorage access (private browsing mode)
+- SSR-safe (checks for window object)
+
+**NotificationScheduler Features**:
+- `calculateNextNotificationTime(intervalHours)` - random delay logic
+  - 2h → random 60-120 minutes
+  - 6h → random 60-360 minutes
+  - 12h → random 60-720 minutes
+  - 24h → random 60-1440 minutes
+- `isWithinQuietHours(time, start, end)` - check quiet hours
+  - Handles midnight crossing (22:00-08:00)
+  - Handles same-day ranges (08:00-22:00)
+- `adjustForQuietHours(time, start, end)` - adjust to end of quiet hours
+- `scheduleNotification(interval, quietStart, quietEnd)` - combined scheduling
+- Pure functions, no side effects
+- Time zone aware (local time)
+
+**useQuotes Hook**:
+- State: `currentQuote: Quote | null`
+- State: `loading: boolean`
+- State: `error: string | null`
+- Function: `loadNewQuote()` - loads random quote (excludes current)
+- Function: `loadQuote(id)` - loads specific quote
+- Auto-loads initial quote on mount
+- Uses QuoteService internally
+- Comprehensive error handling
+
+**useSettings Hook**:
+- State: `interval: number` (default: 2)
+- State: `quietStart: string` (default: "22:00")
+- State: `quietEnd: string` (default: "08:00")
+- Function: `updateInterval(value)` - update and persist (validates 2, 6, 12, 24)
+- Function: `updateQuietHours(start, end)` - update and persist (validates HH:mm)
+- Function: `saveSettings()` - explicit save
+- Auto-saves to localStorage on change
+- Storage keys: calmburst_interval, calmburst_quiet_start, calmburst_quiet_end
+- Input validation for interval and time format
+
+**AppContext Integration**:
+- Created src/context/ directory
+- AppContext.tsx combines useQuotes and useSettings
+- AppProvider wraps entire app in App.tsx
+- useAppContext() hook for accessing context
+- No prop drilling required
+- State persists across navigation
+- Error boundary for context usage
+
+**Component Integration**:
+- HomeView.tsx uses real quote loading from context
+- SettingsView.tsx uses real settings persistence
+- Removed all placeholder/mock data
+- Real-time localStorage persistence
+- Error handling UI in HomeView
+
+**Complete Data Migration**:
+- All 56 quotes migrated from XML to JSON (397 lines)
+- quotes.json validated and verified
+- Bundle size: 8.75 kB (gzipped: 3.47 kB)
+- XML entities properly converted (apostrophes, quotes)
+
+### Security Fixes Applied
+
+**Code Quality**:
+- TypeScript strict mode compliance (0 errors)
+- ESLint compliance (0 errors, 0 warnings)
+- Proper error handling for localStorage failures
+- Input validation for settings (interval, time format)
+- Safe JSON parsing with try-catch
+
+### Why
+
+**Centralized State Management**:
+- AppContext provides single source of truth for app state
+- Eliminates prop drilling across components
+- Makes state management predictable and testable
+- Easy to extend with additional state as needed
+
+**localStorage Persistence**:
+- User settings persist across app restarts
+- Works offline (no backend required)
+- Graceful fallback if localStorage unavailable
+- Generic StorageService is reusable for future needs
+
+**Quote Management**:
+- All 56 quotes available immediately (no network requests)
+- Memory caching prevents redundant JSON parsing
+- Random selection with exclusion avoids immediate repeats
+- Error handling ensures app doesn't crash on missing data
+
+**Notification Scheduling Logic**:
+- Matches Android v1.x behavior exactly (random delay)
+- Quiet hours implementation supports midnight crossing
+- Pure functions are easily testable
+- Ready for Capacitor notification integration in Milestone 5
+
+**Separation of Concerns**:
+- Services handle business logic (quotes, storage, scheduling)
+- Hooks manage React-specific state and effects
+- Context provides app-wide state access
+- Components focus on UI rendering only
+
+### Verification
+
+- TypeScript: PASS (strict mode, 0 errors)
+- ESLint: PASS (0 errors, 0 warnings)
+- Build: PASS (vite build succeeds in 2.45s, 51 modules)
+- Quotes Migration: PASS (56/56 quotes verified)
+- Bundle Size: PASS (quotes.js 8.75 kB, gzipped 3.47 kB)
+- localStorage: PASS (settings persist across reloads)
+- Context Integration: PASS (state shared across components)
+- Quiet Hours Logic: PASS (tested midnight crossing and same-day)
+- Random Delay: PASS (verified ranges for 2h, 6h, 12h, 24h intervals)
+
+### Deliverables
+
+**Services** (3 files, ~300 LOC):
+- quoteService.ts (quote loading and caching)
+- storageService.ts (localStorage wrapper)
+- notificationScheduler.ts (scheduling logic with quiet hours)
+
+**Hooks** (2 files, ~200 LOC):
+- useQuotes.ts (quote state management)
+- useSettings.ts (settings state management)
+
+**Context** (2 files, ~100 LOC):
+- AppContext.tsx (global state provider)
+- context/index.ts (exports)
+
+**Updated Components**:
+- App.tsx (wrapped with AppProvider)
+- HomeView.tsx (integrated with context, real quote loading)
+- SettingsView.tsx (integrated with context, real persistence)
+
+**Data**:
+- quotes.json (56 quotes, 397 lines, 8.75 kB)
+
+**Build Artifacts**:
+- dist/ folder with production build
+- Bundles: 159.67 kB React vendor, 16.17 kB app code, 8.75 kB quotes, 14.59 kB CSS
+- Gzipped: 52.43 kB + 5.68 kB + 3.47 kB + 3.48 kB = ~65 kB total
+
+### Next Steps
+
+**Milestone 4: Capacitor Platform Setup** (Next):
+- Install Capacitor CLI and core packages
+- Run npx cap init (app name: "Calm Burst", app id: "com.calmburst")
+- Add iOS platform (npx cap add ios)
+- Add Android platform (npx cap add android)
+- Configure capacitor.config.ts
+- Install Capacitor plugins (local-notifications, preferences, app, splash-screen)
+- Configure iOS project (Xcode settings)
+- Configure Android project (gradle, permissions)
+- Setup app icons and splash screens
+- Verify iOS and Android projects build
 
 ---
 

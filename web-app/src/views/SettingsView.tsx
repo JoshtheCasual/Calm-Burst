@@ -1,19 +1,27 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
 import { IntervalSelector } from '@/components/IntervalSelector'
 import { TimePickerInput } from '@/components/TimePickerInput'
+import { useAppContext } from '@/context'
 
 export function SettingsView() {
   const navigate = useNavigate()
-  const [interval, setInterval] = useState(2)
-  const [quietStart, setQuietStart] = useState('22:00')
-  const [quietEnd, setQuietEnd] = useState('08:00')
+  const { interval, quietStart, quietEnd, updateInterval, updateQuietHours, saveSettings } =
+    useAppContext()
 
   const handleSave = () => {
-    // Placeholder - will be implemented with actual save logic
+    saveSettings()
+    // Show a success message or navigate back
     console.log('Settings saved:', { interval, quietStart, quietEnd })
+  }
+
+  const handleQuietStartChange = (value: string) => {
+    updateQuietHours(value, quietEnd)
+  }
+
+  const handleQuietEndChange = (value: string) => {
+    updateQuietHours(quietStart, value)
   }
 
   const handleBack = () => {
@@ -42,7 +50,7 @@ export function SettingsView() {
             <p className="text-sm text-text-muted mb-2">
               How often would you like to receive calming notifications?
             </p>
-            <IntervalSelector value={interval} onChange={setInterval} />
+            <IntervalSelector value={interval} onChange={updateInterval} />
           </Card>
         </section>
 
@@ -59,12 +67,12 @@ export function SettingsView() {
               <TimePickerInput
                 label="Start Time"
                 value={quietStart}
-                onChange={setQuietStart}
+                onChange={handleQuietStartChange}
               />
               <TimePickerInput
                 label="End Time"
                 value={quietEnd}
-                onChange={setQuietEnd}
+                onChange={handleQuietEndChange}
               />
             </div>
           </Card>

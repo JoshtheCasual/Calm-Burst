@@ -29,3 +29,11 @@ export interface Session {
   duration: number
   completed: boolean
 }
+
+export interface Quote {
+  id: number
+  text: string
+  author: string
+  year: string
+  context: string
+}

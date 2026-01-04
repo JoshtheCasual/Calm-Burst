@@ -6,6 +6,110 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v2.0.0 Planning - iOS Support via Capacitor Migration - 2026-01-04
+
+### What Changed
+
+**Capacitor Migration Plan Created**:
+- Comprehensive 15-milestone plan for migrating from native Android to Capacitor
+- Architectural decision: React + TypeScript + Vite + Capacitor + Tailwind CSS
+- Target platforms: iOS (new) and Android (migrated from native Kotlin)
+- Planned code sharing: ~90% between iOS/Android
+
+**Migration Strategy**:
+- Phase 1: Web App Foundation (React components, business logic)
+- Phase 2: Capacitor Integration (iOS/Android platforms, native APIs)
+- Phase 3: Platform-Specific Features (notifications, storage, monetization)
+- Phase 4: Testing & App Store Submission
+
+**Milestones Defined**:
+1. Project Structure & Foundation (React + TypeScript + Vite setup)
+2. Core UI Components (Home, Settings, Quote display)
+3. State Management & Business Logic (services, hooks, context)
+4. Capacitor Platform Setup (iOS and Android projects)
+5. Native API Integration - Notifications (local-notifications plugin)
+6. Native API Integration - Storage (preferences plugin)
+7. Monetization Integration (AdMob + In-App Purchase)
+8. iOS-Specific Configuration (Xcode, signing, App Store prep)
+9. Android Migration (feature parity with v1.0.5)
+10. Reconcile & Integration Testing (both platforms)
+11. Security Scan (npm audit, ESLint, permissions review)
+12. Remediation (fix ALL issues)
+13. iOS App Store Submission
+14. Android Google Play Submission
+15. Documentation & Handoff
+
+**Features to Preserve**:
+- All 56 motivational quotes with metadata (quotes.xml → quotes.json)
+- Configurable notification intervals (1-2h, 1-6h, 1-12h, 1-24h)
+- Quiet hours enforcement
+- AdMob banner ads
+- In-app purchase (remove ads, $1.00)
+- Settings persistence
+- Earthy color palette (WCAG AA accessible)
+
+**Timeline Estimate**:
+- Developer effort: 14-21 days
+- App Store review: +1-3 days (iOS), +1-2 days (Android)
+- Total: ~3-4 weeks
+
+### Security Fixes Applied
+- N/A (planning phase only)
+
+### Why
+
+**Strategic Goal: iOS Market Access**:
+- Expand user base to iOS platform (50%+ of US mobile market)
+- Single codebase reduces maintenance burden vs. separate native iOS app
+- Faster time-to-market than building native Swift/SwiftUI app
+
+**Technology Choice Rationale**:
+- **Capacitor**: Excellent native API support (notifications, storage, IAP)
+- **React**: Component reusability, strong ecosystem, TypeScript support
+- **Vite**: Fast development builds, optimized production bundles
+- **Tailwind**: Rapid UI development, maintains existing design system
+- **~90% Code Sharing**: Shared business logic, UI components, styles
+
+**Alternative Approaches Considered**:
+1. ❌ React Native: Would require full rewrite, more complex bridge
+2. ❌ Flutter: Would require learning Dart, full rewrite
+3. ❌ Native Swift/SwiftUI: Maintain two separate codebases (2x effort)
+4. ✅ Capacitor: Best balance of code sharing and native capabilities
+
+**Risk Mitigation Planned**:
+- Notification reliability: Thorough testing on physical devices
+- In-app purchase complexity: Well-maintained plugins, TestFlight testing
+- Performance concerns: Bundle optimization, lazy loading, profiling
+- App Store approval: Strict adherence to Apple guidelines
+
+### Verification
+- Planning: COMPLETE
+- Documentation: PASS (CAPACITOR_MIGRATION_PLAN.md created)
+- Milestones: DEFINED (15 milestones with detailed tasks)
+- Technology Stack: VALIDATED (Capacitor 6.x + React 18.x)
+- Timeline: ESTIMATED (14-21 days developer effort)
+
+### Deliverables
+
+**Planning Documents**:
+- CAPACITOR_MIGRATION_PLAN.md (comprehensive 15-milestone plan)
+- Detailed task breakdown for each milestone
+- Technology stack specifications
+- Risk assessment and mitigation strategies
+- Success criteria (technical and business)
+- Timeline estimates
+
+**Next Steps** (awaiting approval):
+1. Create migration branch `claude/capacitor-migration-v2.0.0-[session-id]`
+2. Begin Milestone 1: Project Structure & Foundation
+3. Deploy parallel development agents for React setup
+4. Follow CLAUDE.md workflow for each milestone
+5. Update CHANGE_NOTES.md after each milestone completion
+
+**Status**: ⏸️ AWAITING USER APPROVAL TO PROCEED
+
+---
+
 ## v1.0.5 Notification System Fix - 2026-01-02
 
 ### What Changed

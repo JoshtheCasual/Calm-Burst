@@ -30,45 +30,52 @@ function isValidInterval(interval: number): interval is ValidInterval {
 }
 
 /**
- * Hook for managing application settings with localStorage persistence
+ * Hook for managing application settings with Capacitor Preferences persistence
  * @returns Settings state and update functions
  */
 export function useSettings() {
-  // Initialize state from localStorage with defaults
-  const [interval, setIntervalState] = useState<number>(() =>
-    StorageService.get<number>(STORAGE_KEYS.INTERVAL, 2)
-  )
+  // Initialize state with defaults (will be loaded from storage in useEffect)
+  const [interval, setIntervalState] = useState<number>(2)
+  const [quietStart, setQuietStartState] = useState<string>('22:00')
+  const [quietEnd, setQuietEndState] = useState<string>('08:00')
 
-  const [quietStart, setQuietStartState] = useState<string>(() =>
-    StorageService.get<string>(STORAGE_KEYS.QUIET_START, '22:00')
-  )
-
-  const [quietEnd, setQuietEndState] = useState<string>(() =>
-    StorageService.get<string>(STORAGE_KEYS.QUIET_END, '08:00')
-  )
-
-  // Validate and load settings on mount
+  // Load settings from storage on mount
   useEffect(() => {
-    // Validate interval
-    if (!isValidInterval(interval)) {
-      console.warn(`Invalid interval value: ${interval}, resetting to 2 hours`)
-      setIntervalState(2)
-      StorageService.set(STORAGE_KEYS.INTERVAL, 2)
+    const loadSettings = async () => {
+      // Load interval
+      const storedInterval = await StorageService.get<number>(STORAGE_KEYS.INTERVAL, 2)
+
+      if (!isValidInterval(storedInterval)) {
+        console.warn(`Invalid interval value: ${storedInterval}, resetting to 2 hours`)
+        setIntervalState(2)
+        await StorageService.set(STORAGE_KEYS.INTERVAL, 2)
+      } else {
+        setIntervalState(storedInterval)
+      }
+
+      // Load quiet hours
+      const storedQuietStart = await StorageService.get<string>(STORAGE_KEYS.QUIET_START, '22:00')
+
+      if (!isValidTimeFormat(storedQuietStart)) {
+        console.warn(`Invalid quietStart format: ${storedQuietStart}, resetting to 22:00`)
+        setQuietStartState('22:00')
+        await StorageService.set(STORAGE_KEYS.QUIET_START, '22:00')
+      } else {
+        setQuietStartState(storedQuietStart)
+      }
+
+      const storedQuietEnd = await StorageService.get<string>(STORAGE_KEYS.QUIET_END, '08:00')
+
+      if (!isValidTimeFormat(storedQuietEnd)) {
+        console.warn(`Invalid quietEnd format: ${storedQuietEnd}, resetting to 08:00`)
+        setQuietEndState('08:00')
+        await StorageService.set(STORAGE_KEYS.QUIET_END, '08:00')
+      } else {
+        setQuietEndState(storedQuietEnd)
+      }
     }
 
-    // Validate quiet hours
-    if (!isValidTimeFormat(quietStart)) {
-      console.warn(`Invalid quietStart format: ${quietStart}, resetting to 22:00`)
-      setQuietStartState('22:00')
-      StorageService.set(STORAGE_KEYS.QUIET_START, '22:00')
-    }
-
-    if (!isValidTimeFormat(quietEnd)) {
-      console.warn(`Invalid quietEnd format: ${quietEnd}, resetting to 08:00`)
-      setQuietEndState('08:00')
-      StorageService.set(STORAGE_KEYS.QUIET_END, '08:00')
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    loadSettings()
   }, []) // Only run on mount
 
   /**
@@ -84,7 +91,10 @@ export function useSettings() {
     }
 
     setIntervalState(value)
-    StorageService.set(STORAGE_KEYS.INTERVAL, value)
+    // Async storage operation - fire and forget
+    StorageService.set(STORAGE_KEYS.INTERVAL, value).catch((error) => {
+      console.error('Failed to save interval to storage:', error)
+    })
   }, [])
 
   /**
@@ -105,17 +115,27 @@ export function useSettings() {
 
     setQuietStartState(start)
     setQuietEndState(end)
-    StorageService.set(STORAGE_KEYS.QUIET_START, start)
-    StorageService.set(STORAGE_KEYS.QUIET_END, end)
+    // Async storage operations - fire and forget
+    Promise.all([
+      StorageService.set(STORAGE_KEYS.QUIET_START, start),
+      StorageService.set(STORAGE_KEYS.QUIET_END, end)
+    ]).catch((error) => {
+      console.error('Failed to save quiet hours to storage:', error)
+    })
   }, [])
 
   /**
    * Explicit save function (settings are auto-saved on change, but this can be used for manual triggers)
    */
   const saveSettings = useCallback(() => {
-    StorageService.set(STORAGE_KEYS.INTERVAL, interval)
-    StorageService.set(STORAGE_KEYS.QUIET_START, quietStart)
-    StorageService.set(STORAGE_KEYS.QUIET_END, quietEnd)
+    // Async storage operations - fire and forget
+    Promise.all([
+      StorageService.set(STORAGE_KEYS.INTERVAL, interval),
+      StorageService.set(STORAGE_KEYS.QUIET_START, quietStart),
+      StorageService.set(STORAGE_KEYS.QUIET_END, quietEnd)
+    ]).catch((error) => {
+      console.error('Failed to save settings to storage:', error)
+    })
   }, [interval, quietStart, quietEnd])
 
   return {

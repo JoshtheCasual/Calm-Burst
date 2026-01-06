@@ -1,0 +1,396 @@
+{
+  "quotes": [
+    {
+      "id": 1,
+      "text": "The only way to do great work is to love what you do.",
+      "author": "Steve Jobs",
+      "year": "2005",
+      "context": "Stanford Commencement Address"
+    },
+    {
+      "id": 2,
+      "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Winston Churchill",
+      "year": "1941",
+      "context": "Speech during World War II"
+    },
+    {
+      "id": 3,
+      "text": "Believe you can and you're halfway there.",
+      "author": "Theodore Roosevelt",
+      "year": "1903",
+      "context": "Presidential speech"
+    },
+    {
+      "id": 4,
+      "text": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "Eleanor Roosevelt",
+      "year": "1958",
+      "context": "This Is My Story memoir"
+    },
+    {
+      "id": 5,
+      "text": "It does not matter how slowly you go as long as you do not stop.",
+      "author": "Confucius",
+      "year": "500 BCE",
+      "context": "Analects philosophical text"
+    },
+    {
+      "id": 6,
+      "text": "Everything you've ever wanted is on the other side of fear.",
+      "author": "George Addair",
+      "year": "1980",
+      "context": "Motivational speaking"
+    },
+    {
+      "id": 7,
+      "text": "I have not failed. I've just found 10,000 ways that won't work.",
+      "author": "Thomas Edison",
+      "year": "1879",
+      "context": "Interview about light bulb invention"
+    },
+    {
+      "id": 8,
+      "text": "The only impossible journey is the one you never begin.",
+      "author": "Tony Robbins",
+      "year": "1995",
+      "context": "Awaken the Giant Within book"
+    },
+    {
+      "id": 9,
+      "text": "Act as if what you do makes a difference. It does.",
+      "author": "William James",
+      "year": "1890",
+      "context": "The Principles of Psychology"
+    },
+    {
+      "id": 10,
+      "text": "Success usually comes to those who are too busy to be looking for it.",
+      "author": "Henry David Thoreau",
+      "year": "1854",
+      "context": "Walden philosophical text"
+    },
+    {
+      "id": 11,
+      "text": "Don't watch the clock; do what it does. Keep going.",
+      "author": "Sam Levenson",
+      "year": "1965",
+      "context": "You Don't Have to Be in Who's Who to Know What's What"
+    },
+    {
+      "id": 12,
+      "text": "The way to get started is to quit talking and begin doing.",
+      "author": "Walt Disney",
+      "year": "1955",
+      "context": "Disneyland opening speech"
+    },
+    {
+      "id": 13,
+      "text": "Don't be afraid to give up the good to go for the great.",
+      "author": "John D. Rockefeller",
+      "year": "1905",
+      "context": "Business philosophy"
+    },
+    {
+      "id": 14,
+      "text": "I find that the harder I work, the more luck I seem to have.",
+      "author": "Thomas Jefferson",
+      "year": "1801",
+      "context": "Letter to colleagues"
+    },
+    {
+      "id": 15,
+      "text": "The road to success and the road to failure are almost exactly the same.",
+      "author": "Colin R. Davis",
+      "year": "1985",
+      "context": "Conductor's memoir"
+    },
+    {
+      "id": 16,
+      "text": "Don't let yesterday take up too much of today.",
+      "author": "Will Rogers",
+      "year": "1930",
+      "context": "Newspaper column"
+    },
+    {
+      "id": 17,
+      "text": "You learn more from failure than from success. Don't let it stop you.",
+      "author": "Unknown",
+      "year": "2000",
+      "context": "Modern motivational wisdom"
+    },
+    {
+      "id": 18,
+      "text": "It's not whether you get knocked down, it's whether you get up.",
+      "author": "Vince Lombardi",
+      "year": "1967",
+      "context": "Green Bay Packers coaching"
+    },
+    {
+      "id": 19,
+      "text": "If you are working on something that you really care about, you don't have to be pushed.",
+      "author": "Steve Jobs",
+      "year": "2007",
+      "context": "D5 Conference interview"
+    },
+    {
+      "id": 20,
+      "text": "People who are crazy enough to think they can change the world, are the ones who do.",
+      "author": "Rob Siltanen",
+      "year": "1997",
+      "context": "Apple Think Different campaign"
+    },
+    {
+      "id": 21,
+      "text": "Failure will never overtake me if my determination to succeed is strong enough.",
+      "author": "Og Mandino",
+      "year": "1968",
+      "context": "The Greatest Salesman in the World"
+    },
+    {
+      "id": 22,
+      "text": "We may encounter many defeats but we must not be defeated.",
+      "author": "Maya Angelou",
+      "year": "1978",
+      "context": "Interview about resilience"
+    },
+    {
+      "id": 23,
+      "text": "Knowing is not enough; we must apply. Wishing is not enough; we must do.",
+      "author": "Johann Wolfgang von Goethe",
+      "year": "1808",
+      "context": "Faust philosophical drama"
+    },
+    {
+      "id": 24,
+      "text": "Imagine your life is perfect in every respect; what would it look like?",
+      "author": "Brian Tracy",
+      "year": "2003",
+      "context": "Goals! How to Get Everything You Want"
+    },
+    {
+      "id": 25,
+      "text": "We generate fears while we sit. We overcome them by action.",
+      "author": "Dr. Henry Link",
+      "year": "1936",
+      "context": "The Return to Religion"
+    },
+    {
+      "id": 26,
+      "text": "Whether you think you can or think you can't, you're right.",
+      "author": "Henry Ford",
+      "year": "1925",
+      "context": "Ford Motor Company philosophy"
+    },
+    {
+      "id": 27,
+      "text": "Security is mostly a superstition. Life is either a daring adventure or nothing.",
+      "author": "Helen Keller",
+      "year": "1940",
+      "context": "Let Us Have Faith book"
+    },
+    {
+      "id": 28,
+      "text": "The only limit to our realization of tomorrow will be our doubts of today.",
+      "author": "Franklin D. Roosevelt",
+      "year": "1945",
+      "context": "Undelivered Jefferson Day Address"
+    },
+    {
+      "id": 29,
+      "text": "Creativity is intelligence having fun.",
+      "author": "Albert Einstein",
+      "year": "1950",
+      "context": "Letters and interviews"
+    },
+    {
+      "id": 30,
+      "text": "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+      "author": "Zig Ziglar",
+      "year": "1975",
+      "context": "See You at the Top book"
+    },
+    {
+      "id": 31,
+      "text": "You are never too old to set another goal or to dream a new dream.",
+      "author": "C.S. Lewis",
+      "year": "1952",
+      "context": "Mere Christianity book"
+    },
+    {
+      "id": 32,
+      "text": "The pessimist sees difficulty in every opportunity. The optimist sees opportunity in every difficulty.",
+      "author": "Winston Churchill",
+      "year": "1940",
+      "context": "World War II speeches"
+    },
+    {
+      "id": 33,
+      "text": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+      "author": "Roy T. Bennett",
+      "year": "2016",
+      "context": "The Light in the Heart book"
+    },
+    {
+      "id": 34,
+      "text": "Do one thing every day that scares you.",
+      "author": "Eleanor Roosevelt",
+      "year": "1960",
+      "context": "You Learn by Living book"
+    },
+    {
+      "id": 35,
+      "text": "It's not the years in your life that count. It's the life in your years.",
+      "author": "Abraham Lincoln",
+      "year": "1858",
+      "context": "Campaign speech"
+    },
+    {
+      "id": 36,
+      "text": "Change your thoughts and you change your world.",
+      "author": "Norman Vincent Peale",
+      "year": "1952",
+      "context": "The Power of Positive Thinking"
+    },
+    {
+      "id": 37,
+      "text": "The best time to plant a tree was 20 years ago. The second best time is now.",
+      "author": "Chinese Proverb",
+      "year": "Ancient",
+      "context": "Traditional wisdom"
+    },
+    {
+      "id": 38,
+      "text": "Only the educated are free.",
+      "author": "Epictetus",
+      "year": "100 CE",
+      "context": "Discourses philosophical text"
+    },
+    {
+      "id": 39,
+      "text": "The secret of getting ahead is getting started.",
+      "author": "Mark Twain",
+      "year": "1895",
+      "context": "Letters and speeches"
+    },
+    {
+      "id": 40,
+      "text": "I never dreamed about success, I worked for it.",
+      "author": "Estée Lauder",
+      "year": "1985",
+      "context": "Estée: A Success Story autobiography"
+    },
+    {
+      "id": 41,
+      "text": "Do not wait to strike till the iron is hot; but make it hot by striking.",
+      "author": "William Butler Yeats",
+      "year": "1899",
+      "context": "The Wind Among the Reeds poetry"
+    },
+    {
+      "id": 42,
+      "text": "If you want to lift yourself up, lift up someone else.",
+      "author": "Booker T. Washington",
+      "year": "1901",
+      "context": "Up From Slavery autobiography"
+    },
+    {
+      "id": 43,
+      "text": "Great minds discuss ideas; average minds discuss events; small minds discuss people.",
+      "author": "Eleanor Roosevelt",
+      "year": "1948",
+      "context": "My Day newspaper column"
+    },
+    {
+      "id": 44,
+      "text": "I alone cannot change the world, but I can cast a stone across the water to create many ripples.",
+      "author": "Mother Teresa",
+      "year": "1979",
+      "context": "Nobel Peace Prize acceptance"
+    },
+    {
+      "id": 45,
+      "text": "If opportunity doesn't knock, build a door.",
+      "author": "Milton Berle",
+      "year": "1974",
+      "context": "Comedy and life philosophy"
+    },
+    {
+      "id": 46,
+      "text": "You can't fall if you don't climb. But there's no joy in living your whole life on the ground.",
+      "author": "Unknown",
+      "year": "2005",
+      "context": "Modern motivational wisdom"
+    },
+    {
+      "id": 47,
+      "text": "Challenges are what make life interesting and overcoming them is what makes life meaningful.",
+      "author": "Joshua J. Marine",
+      "year": "1995",
+      "context": "Motivational speaking"
+    },
+    {
+      "id": 48,
+      "text": "If you want to achieve excellence, you can get there today. Stop doing less-than-excellent work.",
+      "author": "Thomas J. Watson",
+      "year": "1943",
+      "context": "IBM leadership philosophy"
+    },
+    {
+      "id": 49,
+      "text": "A year from now you may wish you had started today.",
+      "author": "Karen Lamb",
+      "year": "2000",
+      "context": "Motivational writing"
+    },
+    {
+      "id": 50,
+      "text": "Some people want it to happen, some wish it would happen, others make it happen.",
+      "author": "Michael Jordan",
+      "year": "1991",
+      "context": "NBA Championship interview"
+    },
+    {
+      "id": 51,
+      "text": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Winston Churchill",
+      "year": "1942",
+      "context": "War-time speeches"
+    },
+    {
+      "id": 52,
+      "text": "The distance between your dreams and reality is called action.",
+      "author": "Unknown",
+      "year": "2010",
+      "context": "Modern motivational wisdom"
+    },
+    {
+      "id": 53,
+      "text": "Stop being afraid of what could go wrong and start being excited about what could go right.",
+      "author": "Tony Robbins",
+      "year": "2000",
+      "context": "Unlimited Power book"
+    },
+    {
+      "id": 54,
+      "text": "The only person you are destined to become is the person you decide to be.",
+      "author": "Ralph Waldo Emerson",
+      "year": "1841",
+      "context": "Self-Reliance essay"
+    },
+    {
+      "id": 55,
+      "text": "Start where you are. Use what you have. Do what you can.",
+      "author": "Arthur Ashe",
+      "year": "1975",
+      "context": "Tennis and life philosophy"
+    },
+    {
+      "id": 56,
+      "text": "Don't count the days, make the days count.",
+      "author": "Muhammad Ali",
+      "year": "1974",
+      "context": "Boxing career interviews"
+    }
+  ]
+}

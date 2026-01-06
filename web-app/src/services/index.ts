@@ -9,3 +9,10 @@ export {
   adjustForQuietHours,
   scheduleNotification,
 } from './notificationScheduler'
+export { NotificationPlugin } from './notificationPlugin'
+export type {
+  PermissionStatus,
+  NotificationPermission,
+  NotificationOptions,
+  NotificationReceivedCallback,
+} from './notificationPlugin'

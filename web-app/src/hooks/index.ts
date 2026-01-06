@@ -2,3 +2,4 @@
 export { useLocalStorage } from './useLocalStorage'
 export { useQuotes } from './useQuotes'
 export { useSettings } from './useSettings'
+export { useNotifications } from './useNotifications'

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Card } from '@/components/Card'
 import { Button } from '@/components/Button'
@@ -7,13 +8,74 @@ import { useAppContext } from '@/context'
 
 export function SettingsView() {
   const navigate = useNavigate()
-  const { interval, quietStart, quietEnd, updateInterval, updateQuietHours, saveSettings } =
-    useAppContext()
+  const {
+    interval,
+    quietStart,
+    quietEnd,
+    updateInterval,
+    updateQuietHours,
+    saveSettings,
+    scheduleNotifications,
+    requestNotificationPermission,
+    notificationsEnabled,
+    permissionStatus,
+  } = useAppContext()
 
-  const handleSave = () => {
-    saveSettings()
-    // Show a success message or navigate back
-    console.log('Settings saved:', { interval, quietStart, quietEnd })
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+  const [showErrorMessage, setShowErrorMessage] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isSaving, setIsSaving] = useState(false)
+
+  const handleSave = async () => {
+    setIsSaving(true)
+    setShowSuccessMessage(false)
+    setShowErrorMessage(false)
+
+    try {
+      // Save settings first
+      saveSettings()
+
+      // Request notification permission if not already granted
+      if (permissionStatus !== 'granted') {
+        try {
+          await requestNotificationPermission()
+        } catch (permError) {
+          // Permission denied - show message but don't fail completely
+          setErrorMessage(
+            'Notification permission denied. Please enable notifications in your device settings to receive reminders.'
+          )
+          setShowErrorMessage(true)
+          setIsSaving(false)
+          return
+        }
+      }
+
+      // Schedule notifications with the saved settings
+      try {
+        await scheduleNotifications()
+        setShowSuccessMessage(true)
+        console.log('Settings saved and notifications scheduled:', {
+          interval,
+          quietStart,
+          quietEnd,
+        })
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setShowSuccessMessage(false)
+        }, 3000)
+      } catch (scheduleError) {
+        setErrorMessage('Settings saved, but failed to schedule notifications. Please try again.')
+        setShowErrorMessage(true)
+        console.error('Error scheduling notifications:', scheduleError)
+      }
+    } catch (error) {
+      setErrorMessage('Failed to save settings. Please try again.')
+      setShowErrorMessage(true)
+      console.error('Error saving settings:', error)
+    } finally {
+      setIsSaving(false)
+    }
   }
 
   const handleQuietStartChange = (value: string) => {
@@ -40,6 +102,48 @@ export function SettingsView() {
             Customize your notification preferences
           </p>
         </header>
+
+        {/* Success Message */}
+        {showSuccessMessage && (
+          <div
+            className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">
+              Settings saved and notifications scheduled successfully!
+            </span>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {showErrorMessage && (
+          <div
+            className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">{errorMessage}</span>
+            <button
+              className="absolute top-0 bottom-0 right-0 px-4 py-3"
+              onClick={() => setShowErrorMessage(false)}
+              aria-label="Close error message"
+            >
+              <span className="text-xl">&times;</span>
+            </button>
+          </div>
+        )}
+
+        {/* Notification Status Info */}
+        {!notificationsEnabled && (
+          <div
+            className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative"
+            role="alert"
+          >
+            <span className="block sm:inline">
+              Notifications are currently disabled. Click &quot;Save Settings&quot; to enable
+              them.
+            </span>
+          </div>
+        )}
 
         {/* Notification Interval Section */}
         <section aria-labelledby="interval-heading">
@@ -93,8 +197,9 @@ export function SettingsView() {
             onClick={handleSave}
             className="min-h-[48px] md:ml-auto"
             aria-label="Save settings"
+            disabled={isSaving}
           >
-            Save Settings
+            {isSaving ? 'Saving...' : 'Save Settings'}
           </Button>
         </div>
       </div>

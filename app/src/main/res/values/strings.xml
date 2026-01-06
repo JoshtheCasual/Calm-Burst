@@ -36,4 +36,12 @@
     <!-- Permissions -->
     <string name="notification_permission_rationale">Allow notifications to receive motivational quotes throughout the day</string>
     <string name="notification_permission_denied">You won\'t receive notifications without this permission</string>
+
+    <!-- Widget -->
+    <string name="widget_name">Calm Burst Widget</string>
+    <string name="widget_description">Display motivational quotes on your home screen</string>
+    <string name="widget_quote_description">Widget motivational quote</string>
+    <string name="widget_refresh_description">Refresh quote</string>
+    <string name="widget_loading">Loading quote…</string>
+    <string name="widget_tap_to_load">Tap to load your daily motivation</string>
 </resources>

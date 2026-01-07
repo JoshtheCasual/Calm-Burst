@@ -1,15 +1,19 @@
 package com.calmburst.worker
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import androidx.work.await
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 /**
- * Schedules periodic notification work using WorkManager.
+ * Schedules periodic notification work and manages widget updates using WorkManager.
  *
  * This class manages the scheduling of NotificationWorker instances that deliver
  * motivational quotes at configurable intervals. It supports:
@@ -17,6 +21,10 @@ import kotlin.random.Random
  * - Random delay within the interval window for natural timing
  * - Battery-aware constraints to avoid draining battery
  * - Persistent scheduling across device reboots
+ * - Synchronized updates for notifications and home screen widgets
+ *
+ * The NotificationWorker automatically updates all widget instances when rotating
+ * quotes, ensuring consistency between notifications and home screen display.
  *
  * @property context Application context for accessing WorkManager
  *
@@ -24,6 +32,10 @@ import kotlin.random.Random
  * ```
  * val scheduler = NotificationScheduler(context)
  * scheduler.scheduleNotifications(intervalHours = 6)
+ *
+ * // Manually trigger widget update (e.g., when user refreshes quote in app)
+ * scheduler.updateWidgets()
+ *
  * // Later, to stop notifications:
  * scheduler.cancelNotifications()
  * ```
@@ -138,18 +150,85 @@ class NotificationScheduler(private val context: Context) {
      * @return true if notification work is scheduled, false otherwise
      *
      * Note: This is useful for UI to show whether notifications are enabled.
-     * However, this method uses getWorkInfosForUniqueWork which returns a LiveData/Flow,
-     * so callers should use coroutines or observe the LiveData.
+     * This is a suspend function to avoid blocking the main thread.
      */
-    fun isScheduled(): Boolean {
-        val workInfos = WorkManager.getInstance(context)
-            .getWorkInfosForUniqueWork(WORK_NAME)
+    suspend fun isScheduled(): Boolean {
         return try {
-            val workInfoList = workInfos.get()
-            workInfoList.any { !it.state.isFinished }
+            val workInfos = WorkManager.getInstance(context)
+                .getWorkInfosForUniqueWork(WORK_NAME)
+                .await()
+            workInfos.any { !it.state.isFinished }
         } catch (e: Exception) {
             android.util.Log.e("NotificationScheduler", "Error checking work status", e)
             false
+        }
+    }
+
+    /**
+     * Manually triggers an update for all home screen widget instances.
+     *
+     * This method sends a broadcast to refresh all Calm Burst widgets on the home screen.
+     * It's useful for scenarios where the widget needs to update independently of the
+     * notification schedule, such as:
+     * - User manually refreshes a quote in the app
+     * - Settings changes that should reflect in the widget
+     * - Initial widget setup or configuration
+     *
+     * The method uses AppWidgetManager to find all widget instances and sends an
+     * update broadcast. If no widgets are installed, the method completes silently.
+     *
+     * Widget updates triggered by this method are independent of the notification
+     * rotation schedule. The periodic NotificationWorker will continue to update
+     * widgets automatically alongside notifications.
+     *
+     * Error handling:
+     * - Gracefully handles missing widget provider class
+     * - Logs errors without throwing exceptions
+     * - Safe to call even when no widgets are installed
+     *
+     * Example usage:
+     * ```
+     * // User tapped "New Quote" button in the app
+     * val scheduler = NotificationScheduler(context)
+     * scheduler.updateWidgets()
+     * ```
+     */
+    fun updateWidgets() {
+        try {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+
+            // Create ComponentName for the widget provider
+            val widgetComponent = ComponentName(
+                context.packageName,
+                "com.calmburst.widget.QuoteWidgetProvider"
+            )
+
+            // Get all widget instance IDs
+            val widgetIds = appWidgetManager.getAppWidgetIds(widgetComponent)
+
+            if (widgetIds.isEmpty()) {
+                android.util.Log.d("NotificationScheduler", "No widgets installed - skipping widget update")
+                return
+            }
+
+            android.util.Log.d("NotificationScheduler", "Triggering manual update for ${widgetIds.size} widget instance(s)")
+
+            // Create an intent to trigger widget update
+            val updateIntent = Intent(context, Class.forName("com.calmburst.widget.QuoteWidgetProvider"))
+            updateIntent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
+
+            // Send broadcast to update all widgets
+            context.sendBroadcast(updateIntent)
+
+            android.util.Log.d("NotificationScheduler", "Widget update broadcast sent successfully")
+
+        } catch (e: ClassNotFoundException) {
+            // Widget provider class doesn't exist yet - this is expected during development
+            android.util.Log.d("NotificationScheduler", "Widget provider not found - widget feature may not be implemented yet")
+        } catch (e: Exception) {
+            // Log any other errors but don't throw
+            android.util.Log.e("NotificationScheduler", "Failed to update widgets", e)
         }
     }
 }

@@ -6,6 +6,48 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
+## v2.0.1 Security Fix & Android Build - 2026-01-09
+
+### What Changed
+
+**Security Vulnerability Fix**:
+- Fixed 3 high-severity react-router XSS vulnerabilities (GHSA-2w69-qvjg-hvjx)
+- Updated @remix-run/router, react-router, and react-router-dom to patched versions
+- npm audit now reports 0 vulnerabilities
+
+**First Capacitor v2.0 Android APK Build**:
+- Built first production-ready Capacitor v2.0.0 Android debug APK
+- APK located at: `binaries/calm-burst-v2.0.0-capacitor-debug-20260109.apk`
+- APK size: 4.5 MB (reduced from 6.6 MB native Kotlin v1.x builds)
+- Built with Java 21, Gradle 8.14.3, Android SDK 36
+
+**Repository Cleanup**:
+- Removed all stale development branches
+- Only main branch remains (origin/main)
+
+### Security Fixes Applied
+
+- react-router XSS via Open Redirects: FIXED ✅ (GHSA-2w69-qvjg-hvjx)
+- npm audit: 0 vulnerabilities
+
+### Why
+
+- Security fix required to address XSS vulnerability in react-router
+- Android APK build provides deployable artifact for testing
+- Branch cleanup maintains clean repository state
+
+### Verification
+
+- TypeScript: PASS (0 errors)
+- ESLint: PASS
+- Build: PASS (Vite 7.3.0, 2.65s)
+- Tests: N/A (no test suite)
+- Security: PASS (0 npm vulnerabilities)
+- Android APK: PASS (assembleDebug successful)
+- iOS: SKIPPED (Xcode not available on Linux)
+
+---
+
 ## v1.0.6 Android Home Screen Widget - 2026-01-06
 
 ### What Changed

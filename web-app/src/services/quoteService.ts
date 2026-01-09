@@ -32,7 +32,10 @@ class QuoteServiceClass {
       try {
         // Use dynamic import to load the JSON file
         const module = await import('@/assets/quotes.json')
-        const quotesData = module.default || module
+        const rawData = module.default || module
+
+        // Handle both { quotes: [...] } and direct array formats
+        const quotesData = Array.isArray(rawData) ? rawData : rawData.quotes
 
         // Validate that we got an array
         if (!Array.isArray(quotesData)) {

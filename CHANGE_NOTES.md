@@ -6,18 +6,23 @@ If you're here, thanks for checking out the history of the app!
 
 ---
 
-## v2.0.1 Security Fix & Android Build - 2026-01-09
+## v2.0.1 Security Fix & Bug Fix - 2026-01-09
 
 ### What Changed
+
+**Bug Fix - Quotes Loading Error**:
+- Fixed "Invalid quotes data: expected an array" error on main screen
+- quoteService.ts now handles both `{ quotes: [...] }` and direct array formats
+- Quotes now load correctly from quotes.json
 
 **Security Vulnerability Fix**:
 - Fixed 3 high-severity react-router XSS vulnerabilities (GHSA-2w69-qvjg-hvjx)
 - Updated @remix-run/router, react-router, and react-router-dom to patched versions
 - npm audit now reports 0 vulnerabilities
 
-**First Capacitor v2.0 Android APK Build**:
-- Built first production-ready Capacitor v2.0.0 Android debug APK
-- APK located at: `binaries/calm-burst-v2.0.0-capacitor-debug-20260109.apk`
+**Capacitor v2.0 Android APK Build**:
+- Built Capacitor v2.0.1 Android debug APK with bug fix
+- APK located at: `binaries/calm-burst-v2.0.1-capacitor-debug-20260109.apk`
 - APK size: 4.5 MB (reduced from 6.6 MB native Kotlin v1.x builds)
 - Built with Java 21, Gradle 8.14.3, Android SDK 36
 

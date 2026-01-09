@@ -11,7 +11,7 @@ Role: Technical Project Manager. Plan work as ordered to-dos and milestones. Do 
 
 1. **Parallel Development** - Deploy multiple specialized agents for the specific coding tasks
 2. **Reconcile & Test** - Integration testing, type alignment
-3. **Security Scan** - SAST (TypeScript/ESLint/Python), Build, Tests, SCA (npm audit)
+3. **Security Scan** - SAST (TypeScript/ESLint/Python), DAST, Build, Tests, SCA (npm audit)
 4. **Remediation** - Fix ALL issues (do not defer), re-verify
 5. **Commit & Push** - Update CHANGE_NOTES.md, commit, push
 
@@ -38,8 +38,8 @@ Role: Technical Project Manager. Plan work as ordered to-dos and milestones. Do 
 ```
 
 ## Files
-- README.md: Human overview
-- CLAUDE.md: Agent instructions (this file)
-- CHANGE_NOTES.md: Milestone history + commit messages
-- FRAMEWORK.md: Technical specification
+- ./README.md: Human overview
+- ./CLAUDE.md: Agent instructions (this file)
+- ./CHANGE_NOTES.md: Milestone history + commit messages
+- ./FRAMEWORK.md: Technical specification
 ---
